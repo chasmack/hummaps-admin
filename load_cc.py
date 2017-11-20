@@ -23,15 +23,15 @@ PG_DSN = 'dbname={database} user={user}'.format(
     database=PG_DATABASE, user=PG_USER
 )
 
-UPDATE_SCHEMA = 'hummaps_update'
+SCHEMA_STAGING = 'hummaps_staging'
 
-UPDATE_TABLE_HOLLINS_MAP = UPDATE_SCHEMA + '.' + 'hollins_map'
-UPDATE_TABLE_HOLLINS_MAP_QQ = UPDATE_SCHEMA + '.' + 'hollins_map_qq'
-UPDATE_TABLE_HOLLINS_SUBSECTION_LIST = UPDATE_SCHEMA + '.' + 'hollins_subsection_list'
-UPDATE_TABLE_HOLLINS_SURVEYOR = UPDATE_SCHEMA + '.' + 'hollins_surveyor'
-UPDATE_TABLE_HOLLINS_TRS = UPDATE_SCHEMA + '.' + 'hollins_trs'
-UPDATE_TABLE_SURVEYOR = UPDATE_SCHEMA + '.' + 'surveyor'
-UPDATE_TABLE_CC = UPDATE_SCHEMA + '.' + 'cc'
+TABLE_HOLLINS_MAP = SCHEMA_STAGING + '.' + 'hollins_map'
+TABLE_HOLLINS_MAP_QQ = SCHEMA_STAGING + '.' + 'hollins_map_qq'
+TABLE_HOLLINS_SUBSECTION_LIST = SCHEMA_STAGING + '.' + 'hollins_subsection_list'
+TABLE_HOLLINS_SURVEYOR = SCHEMA_STAGING + '.' + 'hollins_surveyor'
+TABLE_HOLLINS_TRS = SCHEMA_STAGING + '.' + 'hollins_trs'
+TABLE_SURVEYOR = SCHEMA_STAGING + '.' + 'surveyor'
+TABLE_CC = SCHEMA_STAGING + '.' + 'cc'
 
 XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
 XLSX_DATA_CC = 'data/cc.xlsx'
@@ -40,13 +40,13 @@ XLSX_DATA_CC = 'data/cc.xlsx'
 def init():
     # Create the hummaps_update schema
 
-    print('CREATE SCHEMA: {schema} ...'.format(schema=UPDATE_SCHEMA))
+    print('CREATE SCHEMA: {schema} ...'.format(schema=SCHEMA_STAGING))
 
     with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
         pg_qstr = """
             DROP SCHEMA IF EXISTS {schema} CASCADE;
             CREATE SCHEMA {schema};
-        """.format(schema=UPDATE_SCHEMA)
+        """.format(schema=SCHEMA_STAGING)
         cur.execute(pg_qstr)
         con.commit()
 
@@ -56,7 +56,7 @@ def load_hollins():
 
     with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
 
-        print('CREATE TABLE: {table} ...'.format(table=UPDATE_TABLE_HOLLINS_SURVEYOR))
+        print('CREATE TABLE: {table} ...'.format(table=TABLE_HOLLINS_SURVEYOR))
 
         pg_qstr = """
             DROP TABLE IF EXISTS {table};
@@ -65,7 +65,7 @@ def load_hollins():
               fullname text,
               lastname text
             );
-        """.format(table=UPDATE_TABLE_HOLLINS_SURVEYOR)
+        """.format(table=TABLE_HOLLINS_SURVEYOR)
         cur.execute(pg_qstr)
 
         tree = ET.parse(join(UPDATE_DIR, 'surveyor.xml'))
@@ -77,7 +77,7 @@ def load_hollins():
 
         pg_qstr = """
           INSERT INTO {table} (fullname, lastname) VALUES ( %s, %s );
-        """.format(table=UPDATE_TABLE_HOLLINS_SURVEYOR)
+        """.format(table=TABLE_HOLLINS_SURVEYOR)
         cur.executemany(pg_qstr, rows)
         con.commit()
 
@@ -85,7 +85,7 @@ def load_hollins():
 
         # Transfer contents of SubSectionList table to pg staging
 
-        print('CREATE TABLE: {table} ...'.format(table=UPDATE_TABLE_HOLLINS_SUBSECTION_LIST))
+        print('CREATE TABLE: {table} ...'.format(table=TABLE_HOLLINS_SUBSECTION_LIST))
 
         pg_qstr = """
             DROP TABLE IF EXISTS {table};
@@ -94,7 +94,7 @@ def load_hollins():
               order_code integer,
               subsection text
             );
-        """.format(table=UPDATE_TABLE_HOLLINS_SUBSECTION_LIST)
+        """.format(table=TABLE_HOLLINS_SUBSECTION_LIST)
         cur.execute(pg_qstr)
 
         tree = ET.parse(join(UPDATE_DIR, 'subsectionlist.xml'))
@@ -106,14 +106,14 @@ def load_hollins():
 
         pg_qstr = """
           INSERT INTO {table} (order_code, subsection) VALUES ( %s, %s );
-        """.format(table=UPDATE_TABLE_HOLLINS_SUBSECTION_LIST)
+        """.format(table=TABLE_HOLLINS_SUBSECTION_LIST)
         cur.executemany(pg_qstr, rows)
         con.commit()
 
         print('INSERT: ' + str(cur.rowcount) + ' rows effected.')
 
         # Transfer contents of map table to pg staging
-        print('CREATE TABLE: {table} ...'.format(table=UPDATE_TABLE_HOLLINS_MAP))
+        print('CREATE TABLE: {table} ...'.format(table=TABLE_HOLLINS_MAP))
 
         pg_qstr = """
             DROP TABLE IF EXISTS {table};
@@ -130,7 +130,7 @@ def load_hollins():
               image text,
               comment text
             );
-        """.format(table=UPDATE_TABLE_HOLLINS_MAP)
+        """.format(table=TABLE_HOLLINS_MAP)
         cur.execute(pg_qstr)
 
 
@@ -148,7 +148,7 @@ def load_hollins():
               id, maptype, book, firstpage, lastpage, recdate,
               surveyor, donefor, descript, image, comment
             ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-        """.format(table=UPDATE_TABLE_HOLLINS_MAP)
+        """.format(table=TABLE_HOLLINS_MAP)
 
         cur.executemany(pg_qstr, rows)
         con.commit()
@@ -156,7 +156,7 @@ def load_hollins():
         print('INSERT: ' + str(cur.rowcount) + ' rows effected.')
 
         # Split out the quarter-quarter section info from hollins_map into its own table
-        print('CREATE TABLE: {table} ...'.format(table=UPDATE_TABLE_HOLLINS_MAP_QQ))
+        print('CREATE TABLE: {table} ...'.format(table=TABLE_HOLLINS_MAP_QQ))
 
         # get a list of the qq section columns from map
         tree = ET.parse(join(UPDATE_DIR, 'map.xml'))
@@ -181,12 +181,12 @@ def load_hollins():
               id integer PRIMARY KEY,
               FOREIGN KEY (id) REFERENCES {table_map}
             );
-        """.format(table_map_qq=UPDATE_TABLE_HOLLINS_MAP_QQ, table_map=UPDATE_TABLE_HOLLINS_MAP)
+        """.format(table_map_qq=TABLE_HOLLINS_MAP_QQ, table_map=TABLE_HOLLINS_MAP)
         cur.execute(pg_qstr)
         for col in qq_cols:
             cur.execute("""
                     ALTER TABLE {table_map_qq} ADD COLUMN "{col}" text;
-                """.format(table_map_qq=UPDATE_TABLE_HOLLINS_MAP_QQ, col=col))
+                """.format(table_map_qq=TABLE_HOLLINS_MAP_QQ, col=col))
         con.commit()
 
         # Populate map_qq with maps with qq information
@@ -205,16 +205,16 @@ def load_hollins():
             pg_qstr = """
                 INSERT INTO {table_map_qq} (id, {qq_cols})
                 VALUES ({id}, {qq_values});
-            """.format(table_map_qq=UPDATE_TABLE_HOLLINS_MAP_QQ, id=id, qq_cols=qq_cols, qq_values=qq_values)
+            """.format(table_map_qq=TABLE_HOLLINS_MAP_QQ, id=id, qq_cols=qq_cols, qq_values=qq_values)
             cur.execute(pg_qstr)
 
-        cur.execute('SELECT count(*) FROM {table_map_qq}'.format(table_map_qq=UPDATE_TABLE_HOLLINS_MAP_QQ))
+        cur.execute('SELECT count(*) FROM {table_map_qq}'.format(table_map_qq=TABLE_HOLLINS_MAP_QQ))
         con.commit()
 
         print('INSERT: %d rows affected.' % cur.fetchone())
 
         # Transfer contents of trs table to pg staging
-        print('CREATE TABLE: {table} ...'.format(table=UPDATE_TABLE_HOLLINS_TRS))
+        print('CREATE TABLE: {table} ...'.format(table=TABLE_HOLLINS_TRS))
 
         pg_qstr = """
             DROP TABLE IF EXISTS {table};
@@ -225,7 +225,7 @@ def load_hollins():
               range text,
               section text
             );
-        """.format(table=UPDATE_TABLE_HOLLINS_TRS)
+        """.format(table=TABLE_HOLLINS_TRS)
         cur.execute(pg_qstr)
 
         tree = ET.parse(join(UPDATE_DIR, 'trs.xml'))
@@ -238,7 +238,7 @@ def load_hollins():
         pg_qstr = """
             INSERT INTO {table} (map_id, township, range, section)
             VALUES ( %s, %s, %s, %s );
-        """.format(table=UPDATE_TABLE_HOLLINS_TRS)
+        """.format(table=TABLE_HOLLINS_TRS)
 
         cur.executemany(pg_qstr, rows)
         con.commit()
@@ -251,7 +251,7 @@ def load_surveyor():
 
     with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
 
-        print('CREATE TABLE: {table} ...'.format(table=UPDATE_TABLE_SURVEYOR))
+        print('CREATE TABLE: {table} ...'.format(table=TABLE_SURVEYOR))
 
         pg_qstr = """
             DROP TABLE IF EXISTS {table_surveyor};
@@ -267,7 +267,7 @@ def load_surveyor():
                 pls text,
                 rce text
             );
-        """.format(table_surveyor=UPDATE_TABLE_SURVEYOR)
+        """.format(table_surveyor=TABLE_SURVEYOR)
         cur.execute(pg_qstr)
         con.commit()
 
@@ -282,7 +282,7 @@ def load_surveyor():
             INSERT INTO {table_surveyor} (
               hollins_fullname, fullname, firstname, secondname, thirdname, lastname, suffix, pls, rce
             ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s);
-        """.format(table_surveyor=UPDATE_TABLE_SURVEYOR)
+        """.format(table_surveyor=TABLE_SURVEYOR)
         cur.executemany(pg_qstr, values)
         con.commit()
 
@@ -293,7 +293,7 @@ def load_cc():
 
     with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
 
-        print('CREATE TABLE: {table_cc} ...'.format(table_cc=UPDATE_TABLE_CC))
+        print('CREATE TABLE: {table_cc} ...'.format(table_cc=TABLE_CC))
 
         pg_qstr = """
            DROP TABLE IF EXISTS {table_cc};
@@ -309,7 +309,7 @@ def load_cc():
                doc_number text,
                pages integer
            );
-       """.format(table_cc=UPDATE_TABLE_CC)
+       """.format(table_cc=TABLE_CC)
         cur.execute(pg_qstr)
         con.commit()
 
@@ -324,7 +324,7 @@ def load_cc():
             INSERT INTO {table_cc} (
               maptype, book, firstpage, lastpage, recdate, surveyor, donefor, doc_number, pages
             ) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s);
-        """.format(table_cc=UPDATE_TABLE_CC)
+        """.format(table_cc=TABLE_CC)
         cur.executemany(pg_qstr, values)
         con.commit()
 
@@ -335,13 +335,13 @@ def cleanup():
     # Vacuum up dead tuples from the update
 
     tables = (
-        UPDATE_TABLE_HOLLINS_MAP,
-        UPDATE_TABLE_HOLLINS_MAP_QQ,
-        UPDATE_TABLE_HOLLINS_SUBSECTION_LIST,
-        UPDATE_TABLE_HOLLINS_SURVEYOR,
-        UPDATE_TABLE_HOLLINS_TRS,
-        UPDATE_TABLE_SURVEYOR,
-        UPDATE_TABLE_CC
+        TABLE_HOLLINS_MAP,
+        TABLE_HOLLINS_MAP_QQ,
+        TABLE_HOLLINS_SUBSECTION_LIST,
+        TABLE_HOLLINS_SURVEYOR,
+        TABLE_HOLLINS_TRS,
+        TABLE_SURVEYOR,
+        TABLE_CC
     )
 
     with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
