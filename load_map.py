@@ -46,7 +46,7 @@ def load_map():
         print('CREATE TABLE: {table_map} ...'.format(table_map=TABLE_MAP))
 
         cur.execute("""
-            DROP TABLE IF EXISTS {table_map};
+            DROP TABLE IF EXISTS {table_map} CASCADE;
             CREATE TABLE {table_map}  (
               id integer PRIMARY KEY,
               maptype_id integer REFERENCES {table_maptype},

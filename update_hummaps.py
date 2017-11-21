@@ -29,8 +29,8 @@ if __name__ == '__main__':
     # init_schema();
 
     # Load update data from Hollins and create staging tables
-    # load_update()
-    # load_map()
+    load_update()
+    load_map()
     load_surveyor()
 
     endTime = time.time()
