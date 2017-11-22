@@ -36,6 +36,8 @@ TABLE_SOURCE = SCHEMA_STAGING + '.' + 'source'
 TABLE_SURVEYOR = SCHEMA_STAGING + '.' + 'surveyor'
 TABLE_TRS = SCHEMA_STAGING + '.' + 'trs'
 
+TABLE_TEMP = SCHEMA_STAGING + '.' + 'temp'
+
 USER_ADMIN = 'ubuntu'
 USER_PRODUCTION = 'hummaps'
 
