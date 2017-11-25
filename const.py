@@ -30,6 +30,7 @@ TABLE_CC_IMAGE = SCHEMA_STAGING + '.' + 'cc_image'
 TABLE_MAP = SCHEMA_STAGING + '.' + 'map'
 TABLE_MAP_IMAGE = SCHEMA_STAGING + '.' + 'map_image'
 TABLE_MAPTYPE = SCHEMA_STAGING + '.' + 'maptype'
+TABLE_PDF = SCHEMA_STAGING + '.' + 'pdf'
 TABLE_SUBSECTION_NAMES = SCHEMA_STAGING + '.' + 'subsection_names'
 TABLE_SIGNED_BY = SCHEMA_STAGING + '.' + 'signed_by'
 TABLE_SOURCE = SCHEMA_STAGING + '.' + 'source'
@@ -55,3 +56,5 @@ MAPTYPES = (
     ("Survey", "RS"),
     ("Unrecorded Map", "UR"),
 )
+
+S3_BUCKET_MAPS = 'maps.hummaps.com'
