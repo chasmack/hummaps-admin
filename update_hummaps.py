@@ -6,6 +6,7 @@ from const import *
 from load_update import load_update
 from load_map import load_map
 from load_surveyor import load_surveyor
+from load_map_image import load_map_image
 from load_cc import load_cc, load_cc_image
 from load_pdf import load_pdf
 
@@ -34,6 +35,7 @@ if __name__ == '__main__':
     load_update()
     load_map()
     load_surveyor()
+    load_map_image()
     load_cc()
     load_cc_image()
     load_pdf()
