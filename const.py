@@ -1,6 +1,13 @@
 
 # const.py - common constants
 
+UPDATE_DIR = 'data/update59'
+
+XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
+XLSX_DATA_CC = 'data/cc.xlsx'
+
+S3_BUCKET_MAPS = 'maps.hummaps.com'
+
 PG_DATABASE = 'production'
 PG_USER = 'ubuntu'
 PG_HOST = 'localhost'
@@ -42,11 +49,6 @@ TABLE_TEMP = SCHEMA_STAGING + '.' + 'temp'
 USER_ADMIN = 'ubuntu'
 USER_PRODUCTION = 'hummaps'
 
-UPDATE_DIR = 'data/update59'
-
-XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
-XLSX_DATA_CC = 'data/cc.xlsx'
-
 MAPTYPES = (
     ("Corner Record", "CR"),
     ("Highway Map", "HM"),
@@ -56,5 +58,3 @@ MAPTYPES = (
     ("Survey", "RS"),
     ("Unrecorded Map", "UR"),
 )
-
-S3_BUCKET_MAPS = 'maps.hummaps.com'

@@ -23,7 +23,7 @@ def load_pdf():
             DROP TABLE IF EXISTS {table_pdf};
             CREATE TABLE {table_pdf} (
               id serial PRIMARY KEY,
-              map_id integer NOT NULL REFERENCES {table_map},
+              map_id integer REFERENCES {table_map},
               pdffile text
             );
         """.format(
@@ -39,55 +39,35 @@ def load_pdf():
 
         for maptype in list(row[0] for row in cur):
 
-            obj_iter = bucket.objects.filter(Prefix='pdf/%s/' % maptype)
-
-            # Collect pdf files indexed by map name
-            pdffiles = []
-            for pdf in obj_iter:
-                pdffile = '/' + pdf.key
-                filename = pdffile.split('/')[-1]
-                m = re.match('(\d{3})([a-z]{2})(\d{3})', filename)
-                if not m:
-                    print('>> PDF FILENAME ERROR: %s' % (pdffile))
-                    continue
-                book, maptype, page = m.groups()
-                pdffiles.append((book, maptype.upper(), page, pdffile))
-
-            rowcount = 0
-            for pdf in pdffiles:
-                cur.execute("""
-                    WITH q1 AS (
-                        SELECT
-                          CAST (%s AS integer) book,
-                          CAST (%s AS text) abbrev,
-                          CAST (%s AS integer) page,
-                          CAST (%s AS text) pdffile
-                    ), q2 AS (
-                        SELECT
-                            m.id map_id,
-                            q1.pdffile pdffile
-                        FROM q1
-                        JOIN {table_map} m USING (book, page)
-                        JOIN {table_maptype} t ON m.maptype_id = t.id AND q1.abbrev = t.abbrev
-                    )
-                    INSERT INTO {table_pdf} (map_id, pdffile)
-                    SELECT map_id, pdffile
-                    FROM q2
-                    ;
-                """.format(
-                    table_pdf=TABLE_PDF,
-                    table_map=TABLE_MAP,
-                    table_maptype=TABLE_MAPTYPE
-                ), pdf)
-
-                if cur.rowcount > 0:
-                    rowcount += cur.rowcount
-                else:
-                    print('>> NO MAP RECORD FOR PDF: %s' % (''.join(pdf[0:3])))
-
+            pdffiles = ((obj.key,) for obj in bucket.objects.filter(Prefix='pdf/%s/' % (maptype)))
+            cur.executemany("""
+                 WITH q1 AS (
+                    SELECT '/' || (%s)::text pdffile
+                ), q2 AS (
+                    SELECT
+                        map_id, pdffile
+                    FROM q1
+                    -- need left join on map and maptype together
+                    LEFT JOIN (
+                        SELECT m.id map_id, m.book, m.page, t.abbrev
+                        FROM {table_map} m
+                        JOIN {table_maptype} t ON m.maptype_id = t.id
+                    ) AS s1
+                    ON book = substring(pdffile from '.*/(\d{{3}})')::integer
+                    AND page = substring(pdffile from '.*/\d{{3}}..(\d{{3}})')::integer
+                    AND abbrev = upper(substring(pdffile from '.*/\d{{3}}(..)'))
+                )
+                INSERT INTO {table_pdf} (map_id, pdffile)
+                SELECT map_id, pdffile FROM q2
+                ;
+            """.format(
+                table_pdf=TABLE_PDF,
+                table_map=TABLE_MAP,
+                table_maptype=TABLE_MAPTYPE
+            ), pdffiles)
             con.commit()
 
-            print('INSERT (%s): %d rows affected.' % (maptype.upper(), rowcount))
+            print('INSERT (%s): %d rows affected.' % (maptype.upper(), cur.rowcount))
 
         # Vacuum up dead tuples from the update
         # Vacuum must run outside of a transaction
