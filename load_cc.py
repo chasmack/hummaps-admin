@@ -28,6 +28,7 @@ def load_cc():
             table_cc=TABLE_CC,
             table_map=TABLE_MAP
         ))
+        con.commit()
 
         # Read the XLSX data
         ws = load_workbook(filename=XLSX_DATA_CC, read_only=True).active
@@ -86,25 +87,28 @@ def load_cc():
             table_cc_image=TABLE_CC_IMAGE,
             table_cc=TABLE_CC
         ))
+        con.commit()
 
         # Get a list of cc images from the maps bucket
         s3 = boto3.resource('s3')
         bucket = s3.Bucket(S3_BUCKET_MAPS)
 
-        imagefiles = list(obj.key for obj in bucket.objects.filter(Prefix='map/cc/'))
+        # Put each imagefile in a length = 1 list to be later extended
+        imagefiles = list([obj.key] for obj in bucket.objects.filter(Prefix='map/cc/'))
 
-        # Need the number of pages in a document for new document numbers
+        # Need the number of pages in a document for new style document number
         max_pages = {}
-        for imagefile in imagefiles:
+        for f in imagefiles:
+            imagefile = f[0]
             basename, page = re.match('.*/(.*)-(\d{3})', imagefile).groups()
             if basename not in max_pages:
                 max_pages[basename] = int(page)
             else:
                 max_pages[basename] = max(int(page), max_pages[basename])
 
-        # List of imagefiles with doc number and page
-        imagefiles = []
-        for imagefile in (obj.key for obj in bucket.objects.filter(Prefix='map/cc/')):
+        # Add the doc number and page to each imagefile
+        for f in imagefiles:
+            imagefile = f[0]
             filename = imagefile.split('/')[-1]
             basename = re.match('(.*)-', filename).group(1)
             s1, cc_type, s2, page = (p.lstrip('0') for p in filename.rstrip('.jpg').split('-'))
@@ -112,7 +116,7 @@ def load_cc():
                 doc_number = '%s OR %s' % (s1, s2)
             else:
                 doc_number = '%s-%s-%d' % (s1, s2, max_pages[basename])
-            imagefiles.append((doc_number, int(page), imagefile))
+            f[0:3] = [doc_number, int(page), imagefile]
 
         # Insert imagefile records into the cc image table
         cur.executemany("""

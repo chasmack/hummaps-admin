@@ -2,11 +2,15 @@
 # const.py - common constants
 
 UPDATE_DIR = 'data/update59'
+UPDATE_ZIPFILE = 'update59_171024.zip'
 
 XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
 XLSX_DATA_CC = 'data/cc.xlsx'
 
 S3_BUCKET_MAPS = 'maps.hummaps.com'
+S3_BUCKET_UPDATE = 'update.hummaps.com'
+
+TMP_DIR = '/home/ubuntu/tmp'
 
 PG_DATABASE = 'production'
 PG_USER = 'ubuntu'
@@ -43,8 +47,6 @@ TABLE_SIGNED_BY = SCHEMA_STAGING + '.' + 'signed_by'
 TABLE_SOURCE = SCHEMA_STAGING + '.' + 'source'
 TABLE_SURVEYOR = SCHEMA_STAGING + '.' + 'surveyor'
 TABLE_TRS = SCHEMA_STAGING + '.' + 'trs'
-
-TABLE_TEMP = SCHEMA_STAGING + '.' + 'temp'
 
 USER_ADMIN = 'ubuntu'
 USER_PRODUCTION = 'hummaps'

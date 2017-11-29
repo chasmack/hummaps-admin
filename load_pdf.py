@@ -10,10 +10,6 @@ from const import *
 def load_pdf():
     # Create and load the pdf table.
 
-    # Get a list of pdf files in the maps bucket
-    s3 = boto3.resource('s3')
-    bucket = s3.Bucket(S3_BUCKET_MAPS)
-
     with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
 
         # Create the pdf table
@@ -30,6 +26,11 @@ def load_pdf():
             table_pdf=TABLE_PDF,
             table_map=TABLE_MAP
         ))
+        con.commit()
+
+        # Get a list of pdf files in the maps bucket
+        s3 = boto3.resource('s3')
+        bucket = s3.Bucket(S3_BUCKET_MAPS)
 
         # Process one map type at a time
         cur.execute("""
