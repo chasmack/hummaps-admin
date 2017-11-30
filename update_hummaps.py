@@ -9,6 +9,7 @@ from load_surveyor import load_surveyor
 from load_map_image import load_map_image
 from load_cc import load_cc
 from load_pdf import load_pdf
+from load_scan import load_scan
 
 def init_schema():
     # Create the hummaps staging schema
@@ -38,6 +39,7 @@ if __name__ == '__main__':
     load_map_image()
     load_cc()
     load_pdf()
+    load_scan()
 
     endTime = time.time()
     print('{0:.3f} sec'.format(endTime - startTime))

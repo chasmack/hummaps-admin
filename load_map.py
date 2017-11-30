@@ -29,7 +29,7 @@ def load_map():
 
         # Check we have all the maptypes listed in hollins
         cur.execute("""
-            SELECT DISTINCT maptype
+            SELECT DISTINCT m.id, maptype
             FROM {table_hollins_map} m
             LEFT JOIN {table_maptype} t USING (maptype)
             WHERE t.id is NULL;

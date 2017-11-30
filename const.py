@@ -1,24 +1,19 @@
 
 # const.py - common constants
 
-UPDATE_DIR = 'data/update59'
-UPDATE_ZIPFILE = 'update59_171024.zip'
+UPDATE_DIR = 'data/update60'
 
 XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
 XLSX_DATA_CC = 'data/cc.xlsx'
 
 S3_BUCKET_MAPS = 'maps.hummaps.com'
-S3_BUCKET_UPDATE = 'update.hummaps.com'
-
-TMP_DIR = '/home/ubuntu/tmp'
 
 PG_DATABASE = 'production'
 PG_USER = 'ubuntu'
 PG_HOST = 'localhost'
-PG_PASSWORD = 'pg'
 
 # IPV4 connection
-# PG_DSN = 'dbname={database} user={user} host={host} password={password}'.format(
+# PG_DSN = 'dbname={database} user={user} host={host}'.format(
 #     database=PG_DATABASE, user=PG_USER, host=PG_HOST, password=PG_PASSWORD
 # )
 
@@ -42,9 +37,10 @@ TABLE_MAP = SCHEMA_STAGING + '.' + 'map'
 TABLE_MAP_IMAGE = SCHEMA_STAGING + '.' + 'map_image'
 TABLE_MAPTYPE = SCHEMA_STAGING + '.' + 'maptype'
 TABLE_PDF = SCHEMA_STAGING + '.' + 'pdf'
-TABLE_SUBSECTION_NAMES = SCHEMA_STAGING + '.' + 'subsection_names'
+TABLE_SCAN = SCHEMA_STAGING + '.' + 'scan'
 TABLE_SIGNED_BY = SCHEMA_STAGING + '.' + 'signed_by'
 TABLE_SOURCE = SCHEMA_STAGING + '.' + 'source'
+TABLE_SUBSECTION_NAMES = SCHEMA_STAGING + '.' + 'subsection_names'
 TABLE_SURVEYOR = SCHEMA_STAGING + '.' + 'surveyor'
 TABLE_TRS = SCHEMA_STAGING + '.' + 'trs'
 
