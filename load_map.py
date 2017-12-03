@@ -1,4 +1,5 @@
 import psycopg2
+from openpyxl import load_workbook
 import time
 
 from const import *
@@ -48,7 +49,7 @@ def load_map():
         cur.execute("""
             DROP TABLE IF EXISTS {table_map} CASCADE;
             CREATE TABLE {table_map}  (
-              id integer PRIMARY KEY,
+              id serial PRIMARY KEY,
               maptype_id integer REFERENCES {table_maptype},
               book integer,
               page integer,
@@ -88,7 +89,49 @@ def load_map():
         ))
         con.commit()
 
-        print('INSERT: ' + str(cur.rowcount) + ' rows effected.')
+        print('INSERT (HOLLINS): ' + str(cur.rowcount) + ' rows effected.')
+
+        # Read additional map data from the XLSX file
+        ws = load_workbook(filename=XLSX_DATA_MAP, read_only=True).active
+        HEADER_LINES = 1
+
+        maps = []
+        for map in ws.iter_rows(min_row=HEADER_LINES + 1):
+            maps.append(tuple(c.value for c in map))
+
+        cur.executemany("""
+            -- Reset the primary key sequence
+            SELECT setval('{sequence_map_id}', max(id) + 1) FROM {table_map};
+            WITH q1 AS (
+            SELECT
+                (%s)::text maptype,
+                (%s)::integer book,
+                (%s)::integer page,
+                (%s)::integer npages,
+                (%s)::date recdate,
+                (%s)::text surveyor,
+                (%s)::text client,
+                (%s)::text description,
+                (%s)::text trs,
+                (%s)::text note
+            )
+            INSERT INTO {table_map} (
+               maptype_id, book, page, npages,
+               recdate, client, description, note
+            )
+            SELECT t.id, q1.book, q1.page, q1.npages,
+                q1.recdate, q1.client, q1.description, q1.note
+            FROM q1
+            JOIN {table_maptype} t USING (maptype)
+            ;
+        """.format(
+            table_map=TABLE_MAP,
+            table_maptype=TABLE_MAPTYPE,
+            sequence_map_id=SEQUENCE_MAP_ID
+        ), maps)
+        con.commit()
+
+        print('INSERT (EXTRAS): ' + str(cur.rowcount) + ' rows effected.')
 
         # Vacuum up dead tuples from the update
         tables = (
@@ -100,8 +143,6 @@ def load_map():
         con.autocommit = True
         for t in tables:
             cur.execute('VACUUM FREEZE ' + t)
-
-
 
 
 if __name__ == '__main__':

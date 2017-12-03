@@ -5,6 +5,7 @@ UPDATE_DIR = 'data/update60'
 
 XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
 XLSX_DATA_CC = 'data/cc.xlsx'
+XLSX_DATA_MAP = 'data/map.xlsx'
 
 S3_BUCKET_MAPS = 'maps.hummaps.com'
 
@@ -43,6 +44,8 @@ TABLE_SOURCE = SCHEMA_STAGING + '.' + 'source'
 TABLE_SUBSECTION_NAMES = SCHEMA_STAGING + '.' + 'subsection_names'
 TABLE_SURVEYOR = SCHEMA_STAGING + '.' + 'surveyor'
 TABLE_TRS = SCHEMA_STAGING + '.' + 'trs'
+
+SEQUENCE_MAP_ID = SCHEMA_STAGING + '.' + 'map_id_seq'
 
 USER_ADMIN = 'ubuntu'
 USER_PRODUCTION = 'hummaps'

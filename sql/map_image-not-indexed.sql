@@ -9,7 +9,7 @@ SELECT map "Not Indexed"
 FROM (
 SELECT distinct maptype, map
 FROM q1
-WHERE maptype NOT IN ('rm', 'rs')
+-- WHERE maptype NOT IN ('rm', 'rs')
 ORDER BY maptype, map
 ) AS s1
 ;

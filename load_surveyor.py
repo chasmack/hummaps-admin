@@ -1,4 +1,3 @@
-import xml.etree.ElementTree as ET
 from openpyxl import load_workbook
 import psycopg2
 import time
@@ -122,8 +121,8 @@ def load_surveyor():
         cur.execute("""
             DROP TABLE IF EXISTS {table_signed_by};
             CREATE TABLE {table_signed_by}  (
-              map_id integer REFERENCES {table_map},
-              surveyor_id integer REFERENCES {table_surveyor},
+              map_id integer NOT NULL REFERENCES {table_map},
+              surveyor_id integer NOT NULL REFERENCES {table_surveyor},
               PRIMARY KEY (map_id, surveyor_id)
             );
         """.format(
@@ -132,16 +131,18 @@ def load_surveyor():
             table_surveyor=TABLE_SURVEYOR
         ))
 
+        # Maps without surveyors in the surveyor list, i.e. UNKNOWN, etc.,
+        # don't get a record in the signed by table.
         cur.execute("""
             WITH q1 AS (
                 SELECT id AS map_id,
-                    regexp_split_to_table(upper(surveyor), '\s+&\s+') AS hollins_fullname
+                    regexp_split_to_table(upper(surveyor), '\s*&\s*') AS hollins_fullname
                 FROM {table_hollins_map}
             ), q2 AS (
                 SELECT q1.map_id, s.id as surveyor_id
-                FROM {table_hollins_fullname} f
-                LEFT JOIN q1 USING (hollins_fullname)
-                LEFT JOIN {table_surveyor} s USING (fullname)
+                FROM q1
+                JOIN {table_hollins_fullname} f USING (hollins_fullname)
+                JOIN {table_surveyor} s USING (fullname)
             )
             INSERT INTO {table_signed_by} (map_id, surveyor_id)
             SELECT map_id, surveyor_id from q2;
@@ -153,7 +154,50 @@ def load_surveyor():
         ))
         con.commit()
 
-        print('INSERT: %d rows affected.' % (cur.rowcount))
+        print('INSERT (HOLLINS): %d rows affected.' % (cur.rowcount))
+
+        # Read additional data from the map XLSX file
+        ws = load_workbook(filename=XLSX_DATA_MAP, read_only=True).active
+        HEADER_LINES = 1
+
+        maps = []
+        for map in ws.iter_rows(min_row=HEADER_LINES + 1):
+            maps.append(tuple(c.value for c in map))
+
+        cur.executemany("""
+            WITH q1 AS (
+            SELECT
+                (%s)::text maptype,
+                (%s)::integer book,
+                (%s)::integer page,
+                (%s)::integer npages,
+                (%s)::date recdate,
+                regexp_split_to_table(upper((%s)::text), '\s*&\s*') hollins_fullname,
+                (%s)::text client,
+                (%s)::text description,
+                (%s)::text trs,
+                (%s)::text note
+            )
+            INSERT INTO {table_signed_by} (map_id, surveyor_id)
+            SELECT m.id map_id, s.id as surveyor_id
+            FROM q1
+            JOIN {table_maptype} t ON q1.maptype = t.maptype
+            JOIN {table_map} m ON t.id = m.maptype_id
+                AND q1.book = m.book AND q1.page = m.page
+            JOIN {table_hollins_fullname} f ON q1.hollins_fullname = f.hollins_fullname
+            JOIN {table_surveyor} s ON f.fullname = s.fullname
+            ;
+        """.format(
+            table_map=TABLE_MAP,
+            table_maptype=TABLE_MAPTYPE,
+            table_hollins_fullname=TABLE_HOLLINS_FULLNAME,
+            table_surveyor=TABLE_SURVEYOR,
+            table_signed_by=TABLE_SIGNED_BY
+        ), maps)
+        con.commit()
+
+        print('INSERT (EXTRAS): ' + str(cur.rowcount) + ' rows effected.')
+
 
         # Vacuum up dead tuples from the update
         tables = (
