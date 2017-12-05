@@ -8,7 +8,7 @@ from const import *
 
 def load_trs():
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Create and load the source table
         print('CREATE TABLE: {table_source} ...'.format(table_source=TABLE_SOURCE))
@@ -92,28 +92,15 @@ def load_trs():
 
         # Insert trs records from Hollins subsection data
         cur.execute("""
-            WITH q1 AS (
-                SELECT column_name,
-                    {function_township_number}(substring(column_name from '(\d+[ns])')) tshp,
-                    {function_range_number}(substring(column_name from '\d+[ns](\d+[ew])')) rng,
-                    substring(column_name from '\d+[ns]\d+[ew](\d+)')::int sec
-                FROM information_schema.columns
-                WHERE table_schema = substring('{table_hollins_map_qq}', '(.*)\.')
-                AND table_name = substring('{table_hollins_map_qq}', '\.(.*)')
-                AND column_name != 'id'
-            )
             INSERT INTO {table_trs} (map_id, tshp, rng, sec, subsec, source_id)
             SELECT
-                ss.map_id, q1.tshp, q1.rng, q1.sec, ss.subsec,
+                map_id, tshp, rng, sec, subsec,
                 {trs_source_hollins_subsection} source_id
-            FROM q1, {function_hollins_subsec_bits}(column_name) ss
+            FROM {function_hollins_subsec}()
             ;
         """.format(
             table_trs=TABLE_TRS,
-            table_hollins_map_qq=TABLE_HOLLINS_MAP_QQ,
-            function_township_number=FUNCTION_TOWNSHIP_NUMBER,
-            function_range_number=FUNCTION_RANGE_NUMBER,
-            function_hollins_subsec_bits=FUNCTION_HOLLINS_SUBSEC_BITS,
+            function_hollins_subsec=FUNCTION_HOLLINS_SUBSEC,
             trs_source_hollins_subsection=TRS_SOURCE_HOLLINS_SUBSECTION
         ))
         con.commit()

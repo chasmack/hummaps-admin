@@ -15,7 +15,7 @@ from const import *
 
 def load_surveyor():
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Read the surveyor data and hollins surveyor mapping from the XLSX data
         ws = load_workbook(filename=XLSX_DATA_SURVEYOR, read_only=True).active

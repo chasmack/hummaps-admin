@@ -8,7 +8,7 @@ from const import *
 
 def load_map():
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Load the maptype table
         print('CREATE TABLE: {table_maptype} ...'.format(table_maptype=TABLE_MAPTYPE))

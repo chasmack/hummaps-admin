@@ -14,7 +14,7 @@ def load_map_image():
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(S3_BUCKET_MAPS)
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Create the map_image table
         print('CREATE TABLE: {table_map_image} ...'.format(table_map_image=TABLE_MAP_IMAGE))

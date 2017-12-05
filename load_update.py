@@ -11,7 +11,7 @@ from const import *
 def load_update():
     # Load the hummaps staging tables from XML data
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Load Hollins surveyor from XML
         print('CREATE TABLE: {table_hollins_surveyor} ...'.format(table_hollins_surveyor=TABLE_HOLLINS_SURVEYOR))

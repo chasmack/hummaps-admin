@@ -11,7 +11,7 @@ from const import *
 def load_cc():
     # Load the cc table from cc.xlsx.
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Create the cc table
         print('CREATE TABLE: {table_cc} ...'.format(table_cc=TABLE_CC))

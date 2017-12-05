@@ -10,7 +10,7 @@ from const import *
 # Create and load the scan table.
 def load_scan():
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Create the scan table
         print('CREATE TABLE: {table_scan} ...'.format(table_scan=TABLE_SCAN))

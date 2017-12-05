@@ -10,7 +10,7 @@ from const import *
 def load_pdf():
     # Create and load the pdf table.
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Create the pdf table
         print('CREATE TABLE: {table_pdf} ...'.format(table_pdf=TABLE_PDF))

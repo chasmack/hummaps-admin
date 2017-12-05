@@ -9,7 +9,7 @@ from const import *
 def create_funcs():
 
 
-    with psycopg2.connect(PG_DSN) as con, con.cursor() as cur:
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Get the map id given maptype abbrev, book and page.
         print('CREATE FUNCTION: {function_map_id} ...'.format(function_map_id=FUNCTION_MAP_ID))
@@ -252,9 +252,15 @@ def create_funcs():
 
         # A function to convert legacy comma separated qq strings into bit patterns.
         #
+        # This function also addresses the problem of accessing the "unique"
+        # structure of the subsection data in the Hollins map table. It runs
+        # through the column names returning a set of map ids and subsection
+        # bitmaps for that column in the hollins map qq table. It also returns
+        # township, range and section parsed from the column name.
+        #
         # Hollins numbered the qq sections 1 through 16 starting in the upper
         # right hand corner and working back and forth down the section in the
-        # same manner as sections are numbered in a township (boustrophedon).
+        # same way sections are numbered in a township (boustrophedon).
         #
         # This scheme numbers the qq sections in a more conventional manner
         # starting in the upper left corner filling rows from left to right.
@@ -266,26 +272,44 @@ def create_funcs():
         # 0x0100 => #9 (NW/4 SW/4)
         # 0xcc00 => #11,12,15,16 (SE/4)
         #
-        # This function also addresses the problem of accessing the non-normal
-        # structure of the subsection data in the Hollins map table. It takes
-        # a column name as a parameter and returns a set of map ids and subsection
-        # bitmaps from that column in the hollins map qq table.
 
-        print('CREATE FUNCTION: {function_hollins_subsec_bits} ...'.format(
-            function_hollins_subsec_bits=FUNCTION_HOLLINS_SUBSEC_BITS))
+        print('CREATE FUNCTION: {function_hollins_subsec} ...'.format(
+            function_hollins_subsec=FUNCTION_HOLLINS_SUBSEC))
 
         cur.execute("""
             CREATE OR REPLACE FUNCTION
-            {function_hollins_subsec_bits}(column_name text)
-            RETURNS TABLE(map_id int, subsec int) AS $$
+            {function_hollins_subsec}()
+            RETURNS TABLE(
+                map_id int,
+                tshp int,
+                rng int,
+                sec int,
+                subsec int
+            ) AS $$
+            DECLARE
+                column_name text;
             BEGIN
-                RETURN QUERY EXECUTE format('
-                    WITH q1 AS (
-                    SELECT id AS map_id,
-                        regexp_split_to_table(trim('','' from %I), '','')::int AS hollins_subsec
-                    FROM {table_hollins_map_qq}
-                    ), q2 as (
-                    SELECT map_id,
+                FOR column_name IN
+                SELECT c.column_name
+                FROM information_schema.columns c
+                WHERE c.table_schema = '{schema_staging}'
+                AND c.table_name = substring('{table_hollins_map_qq}', '\.(.*)')
+                AND c.column_name != 'id'
+                ORDER BY c.column_name
+            LOOP
+            RETURN QUERY EXECUTE format('
+                WITH q1 AS (
+                SELECT
+                    ''%s''::text AS column_name,
+                    id AS map_id,
+                    regexp_split_to_table(trim('','' from %I), '','')::int AS hollins_subsec
+                FROM {table_hollins_map_qq}
+                ), q2 as (
+                SELECT
+                    map_id,
+                    {function_township_number}(substring(column_name from ''(\d+[ns])'')) tshp,
+                    {function_range_number}(substring(column_name from ''\d+[ns](\d+[ew])'')) rng,
+                    substring(column_name from ''\d+[ns]\d+[ew](\d+)'')::integer sec,
                     CASE
                         WHEN hollins_subsec = 1  THEN x''0008''::int
                         WHEN hollins_subsec = 2  THEN x''0004''::int
@@ -304,21 +328,27 @@ def create_funcs():
                         WHEN hollins_subsec = 15 THEN x''4000''::int
                         WHEN hollins_subsec = 16 THEN x''8000''::int
                         ELSE NULL
-                    END subsec
-                    FROM q1
-                    WHERE hollins_subsec IS NOT NULL
-                    )
-                    SELECT map_id, sum(subsec)::int subsec
-                    FROM q2
-                    GROUP BY map_id
-                    ORDER BY map_id
-                ', column_name);
+                    END AS subsec
+                FROM q1
+                WHERE hollins_subsec IS NOT NULL
+                )
+                SELECT
+                    map_id, tshp, rng, sec,
+                    sum(subsec)::int AS subsec
+                FROM q2
+                GROUP BY map_id, tshp, rng, sec
+                ORDER BY map_id
+            ', column_name, column_name);
+            END LOOP;
             END;
             $$ LANGUAGE plpgsql
             IMMUTABLE;
         """.format(
-            function_hollins_subsec_bits=FUNCTION_HOLLINS_SUBSEC_BITS,
-            table_hollins_map_qq=TABLE_HOLLINS_MAP_QQ
+            function_hollins_subsec=FUNCTION_HOLLINS_SUBSEC,
+            function_township_number=FUNCTION_TOWNSHIP_NUMBER,
+            function_range_number=FUNCTION_RANGE_NUMBER,
+            table_hollins_map_qq=TABLE_HOLLINS_MAP_QQ,
+            schema_staging=SCHEMA_STAGING
         ))
         con.commit()
 
