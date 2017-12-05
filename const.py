@@ -41,11 +41,21 @@ TABLE_PDF = SCHEMA_STAGING + '.' + 'pdf'
 TABLE_SCAN = SCHEMA_STAGING + '.' + 'scan'
 TABLE_SIGNED_BY = SCHEMA_STAGING + '.' + 'signed_by'
 TABLE_SOURCE = SCHEMA_STAGING + '.' + 'source'
-TABLE_SUBSECTION_NAMES = SCHEMA_STAGING + '.' + 'subsection_names'
+TABLE_SUBSEC_NAMES = SCHEMA_STAGING + '.' + 'subsec_names'
 TABLE_SURVEYOR = SCHEMA_STAGING + '.' + 'surveyor'
 TABLE_TRS = SCHEMA_STAGING + '.' + 'trs'
 
 SEQUENCE_MAP_ID = SCHEMA_STAGING + '.' + 'map_id_seq'
+
+FUNCTION_MAP_ID = SCHEMA_STAGING + '.' + 'map_id'
+FUNCTION_MAP_NAME = SCHEMA_STAGING + '.' + 'map_name'
+FUNCTION_TOWNSHIP_NUMBER = SCHEMA_STAGING + '.' + 'township_number'
+FUNCTION_TOWNSHIP_STR = SCHEMA_STAGING + '.' + 'township_str'
+FUNCTION_RANGE_NUMBER = SCHEMA_STAGING + '.' + 'range_number'
+FUNCTION_RANGE_STR = SCHEMA_STAGING + '.' + 'range_str'
+FUNCTION_SUBSEC_BITS = SCHEMA_STAGING + '.' + 'subsec_bits'
+FUNCTION_SUBSEC_STR = SCHEMA_STAGING + '.' + 'subsec_str'
+FUNCTION_HOLLINS_SUBSEC_BITS = SCHEMA_STAGING + '.' + 'hollins_subsec_bits'
 
 USER_ADMIN = 'ubuntu'
 USER_PRODUCTION = 'hummaps'
@@ -59,3 +69,10 @@ MAPTYPES = (
     ("Survey", "RS"),
     ("Unrecorded Map", "UR"),
 )
+
+# Source list for the trs records
+TRS_SOURCE_HOLLINS_SECTION = 0
+TRS_SOURCE_HOLLINS_SUBSECTION = 1
+TRS_SOURCE_PARSED_SECTION = 2
+TRS_SOURCE_PARSED_SUBSECTION = 3
+TRS_SOURCE_XLSX_DATA = 4
