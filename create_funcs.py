@@ -290,18 +290,18 @@ def create_funcs():
                 column_name text;
             BEGIN
                 FOR column_name IN
-                SELECT c.column_name
-                FROM information_schema.columns c
-                WHERE c.table_schema = '{schema_staging}'
-                AND c.table_name = substring('{table_hollins_map_qq}', '\.(.*)')
-                AND c.column_name != 'id'
-                ORDER BY c.column_name
+                SELECT columns.column_name
+                FROM information_schema.columns
+                WHERE columns.table_schema = '{schema_staging}'
+                AND columns.table_name = substring('{table_hollins_map_qq}', '\.(.*)')
+                AND columns.column_name != 'id'
+                ORDER BY columns.column_name
             LOOP
             RETURN QUERY EXECUTE format('
                 WITH q1 AS (
                 SELECT
-                    ''%s''::text AS column_name,
                     id AS map_id,
+                    lower(''%s'') AS column_name,
                     regexp_split_to_table(trim('','' from %I), '','')::int AS hollins_subsec
                 FROM {table_hollins_map_qq}
                 ), q2 as (
@@ -333,8 +333,7 @@ def create_funcs():
                 WHERE hollins_subsec IS NOT NULL
                 )
                 SELECT
-                    map_id, tshp, rng, sec,
-                    sum(subsec)::int AS subsec
+                    map_id, tshp, rng, sec, sum(subsec)::int AS subsec
                 FROM q2
                 GROUP BY map_id, tshp, rng, sec
                 ORDER BY map_id

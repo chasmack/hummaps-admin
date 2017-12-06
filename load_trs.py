@@ -157,7 +157,7 @@ def load_trs():
         ), maps)
         con.commit()
 
-        print('INSERT (XLSX EXTRAS): ' + str(cur.rowcount) + ' rows effected.')
+        print('INSERT (EXTRAS): ' + str(cur.rowcount) + ' rows effected.')
 
         # Vacuum must run outside of a transaction
         con.autocommit = True

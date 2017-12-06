@@ -16,13 +16,18 @@ from load_scan import load_scan
 from load_trs import load_trs
 
 
+def apache2_stop():
+    print(check_output(('sudo', 'service', 'apache2', 'stop'), universal_newlines=True))
+
+
+def apache2_start():
+    print(check_output(('sudo', 'service', 'apache2', 'start'), universal_newlines=True))
+
+
 # Create the hummaps staging schema
 def init_database():
 
     print('CREATE DATABASE: {database_prod} ...'.format(database_prod=DATABASE_PROD))
-
-    out = check_output(('sudo', 'service', 'apache2', 'stop'), universal_newlines=True)
-    print(out)
 
     sql = """
         DROP DATABASE IF EXISTS {database_prod};
@@ -43,15 +48,13 @@ def init_database():
         password_prod=PASSWORD_PROD
     )
 
+    # Need superuser to run the database creation commands
     cmd = ('sudo', '--user', USER_POSTGRES, 'psql')
     proc = Popen(cmd, universal_newlines=True,
                  stdin=subprocess.PIPE,
                  stdout=subprocess.PIPE,
                  stderr=subprocess.STDOUT)
     out = proc.communicate(input=sql)[0]
-    print(out)
-
-    out = check_output(('sudo', 'service', 'apache2', 'start'), universal_newlines=True)
     print(out)
 
 
@@ -306,6 +309,9 @@ if __name__ == '__main__':
     print('\nPerforming update ... ')
     startTime = time.time()
 
+    # Stop the web server
+    apache2_stop()
+
     # Create the database and staging schema
     init_database()
     init_staging()
@@ -323,6 +329,9 @@ if __name__ == '__main__':
 
     # Copy tables and data from staging to production
     load_prod()
+
+    # Restart the web server
+    apache2_start()
 
     endTime = time.time()
     print('{0:.3f} sec'.format(endTime - startTime))
