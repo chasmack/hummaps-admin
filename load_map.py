@@ -133,6 +133,74 @@ def load_map():
 
         print('INSERT (EXTRAS): ' + str(cur.rowcount) + ' rows effected.')
 
+        # Read parcel map numbers from the XLSX file
+        ws = load_workbook(filename=XLSX_DATA_PM, read_only=True).active
+        HEADER_LINES = 1
+
+        maps = []
+        for map in ws.iter_rows(min_row=HEADER_LINES + 1):
+            maps.append(tuple(c.value for c in map))
+
+        cur.executemany("""
+            WITH q1 AS (
+              SELECT m.id map_id, t.maptype, m.book, m.page,
+                regexp_replace(v.pm, '(\d+)(.*)', ' (PM\\1)\\2') pm
+              FROM (
+                VALUES (
+                  (%s)::text, (%s)::integer, (%s)::integer, (%s)::text, (%s)::text
+                )
+              ) AS v (maptype, book, page, pm, note)
+              LEFT JOIN {table_map} m ON v.book = m.book AND v.page = m.page
+              LEFT JOIN {table_maptype} t ON m.maptype_id = t.id
+              WHERE v.maptype = t.maptype
+            )
+            UPDATE {table_map} m
+            SET client = client || q1.pm
+            FROM q1
+            WHERE m.id = q1.map_id
+            ;
+        """.format(
+            table_map=TABLE_MAP,
+            table_maptype=TABLE_MAPTYPE
+        ), maps)
+        con.commit()
+
+        print('UPDATE (PARCEL NUMBER): ' + str(cur.rowcount) + ' rows effected.')
+
+        # Read tract numbers from the XLSX file
+        ws = load_workbook(filename=XLSX_DATA_TRACT, read_only=True).active
+        HEADER_LINES = 1
+
+        maps = []
+        for map in ws.iter_rows(min_row=HEADER_LINES + 1):
+            maps.append(tuple(c.value for c in map))
+
+        cur.executemany("""
+            WITH q1 AS (
+              SELECT m.id map_id, t.maptype, m.book, m.page,
+                regexp_replace(v.pm, '(\d+)(.*)', ' (TR\\1)\\2') pm
+              FROM (
+                VALUES (
+                  (%s)::text, (%s)::integer, (%s)::integer, (%s)::text, (%s)::text
+                )
+              ) AS v (maptype, book, page, pm, note)
+              LEFT JOIN {table_map} m ON v.book = m.book AND v.page = m.page
+              LEFT JOIN {table_maptype} t ON m.maptype_id = t.id
+              WHERE v.maptype = t.maptype
+            )
+            UPDATE {table_map} m
+            SET client = client || q1.pm
+            FROM q1
+            WHERE m.id = q1.map_id
+            ;
+        """.format(
+            table_map=TABLE_MAP,
+            table_maptype=TABLE_MAPTYPE
+        ), maps)
+        con.commit()
+
+        print('UPDATE (TRACT NUMBER): ' + str(cur.rowcount) + ' rows effected.')
+
         # Vacuum up dead tuples from the update
         tables = (
             TABLE_MAP,

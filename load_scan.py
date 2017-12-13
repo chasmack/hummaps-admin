@@ -20,6 +20,7 @@ def load_scan():
             CREATE TABLE {table_scan} (
               id serial PRIMARY KEY,
               map_id integer REFERENCES {table_map},
+              page integer,
               scanfile text
             );
         """.format(
@@ -46,7 +47,9 @@ def load_scan():
                     SELECT '/' || (%s)::text scanfile
                 ), q2 AS (
                     SELECT
-                        map_id, scanfile
+                        map_id,
+                        substring(scanfile from '.*-(\d{{3}})')::integer scan_page,
+                        scanfile
                     FROM q1
                     -- need left join on map and maptype together
                     LEFT JOIN (
@@ -58,8 +61,8 @@ def load_scan():
                     AND page = substring(scanfile from '.*/\d{{3}}..(\d{{3}})')::integer
                     AND abbrev = upper(substring(scanfile from '.*/\d{{3}}(..)'))
                 )
-                INSERT INTO {table_scan} (map_id, scanfile)
-                SELECT map_id, scanfile FROM q2
+                INSERT INTO {table_scan} (map_id, page, scanfile)
+                SELECT map_id, scan_page, scanfile FROM q2
                 ;
             """.format(
                 table_scan=TABLE_SCAN,

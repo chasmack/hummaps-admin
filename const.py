@@ -6,6 +6,8 @@ UPDATE_DIR = 'data/update60'
 XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
 XLSX_DATA_CC = 'data/cc.xlsx'
 XLSX_DATA_MAP = 'data/map.xlsx'
+XLSX_DATA_PM = 'data/pm.xlsx'
+XLSX_DATA_TRACT = 'data/tract.xlsx'
 
 S3_BUCKET_MAPS = 'maps.hummaps.com'
 
