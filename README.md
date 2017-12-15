@@ -1,6 +1,6 @@
 # hummaps-admin 
 
-#### Admin tools for Hummaps
+### Update tool for Hummaps
 
 These tools combine data from a number of sources to rebuild 
 the production hummaps datebase.
