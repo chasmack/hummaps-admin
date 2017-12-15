@@ -16,7 +16,7 @@ The structure of *hummaps* is described by the
 Other tables and file names are given in the constants definition file
 [const.py](https://github.com/chasmack/hummaps-admin/blob/master/const.py).
 
-#### Source Data
+### Source Data
 
 The MS Access database originally designed by Michael Hollins,
 typically named *tables.mdb*, is converted into XML using MS Access.
@@ -26,14 +26,14 @@ The Excel file *surveyors.xlsx* lists information on surveyors and provides
 a link from the original Hollins surveyor name and hummaps *surveyor* record.
 For historical reasons multiple Hollins surveyors can point to a 
 single *surveyor* record. 
-In that case all fields except *HOLLINS_FULLNAME* must be identical.
+In that case all fields except HOLLINS_FULLNAME must be identical.
 
 The Excel file *cc.xlsx* lists Certificate of Corrections and the map
-to which they apply. The *RECDATE* field refers to the recording date
+to which they apply. The RECDATE field refers to the recording date
 of the map being corrected and must agree with the map record.
 
 The Excel file *map.xlsx* lists additional map records to be added.
-The *TRS* field lists township-range-section records to be added to the
+The TRS field lists township-range-section records to be added to the
 hummaps *trs* table. Multiple comma-separated TRS records can be listed.
 Each TRS record is in regular hummaps subsection-section format.
 
@@ -45,7 +45,7 @@ word AMENDED added.
 The Excel file *tract.xlsx* lists tract numbers for Record Maps.
 Not all Record Maps were assigned tract numbers.
 
-#### Update Workflow
+### Update Workflow
 
 Workflow is controlled by *update_hummaps.py*.
 
@@ -94,14 +94,16 @@ That functionality has not yet been brought forward into this version of the upd
 
 12. THe Apache web server is restarted. 
 
-This entire process runs from the command line of the EC2 Linux server -
+The update process runs from a command line on the 
+EC2 Linux server hosting Hummaps -
 
 $ cd /home/ubuntu/www/hummaps-staging
 $ python3 update_hummaps.py
 
-The processing takes about 5 minutes during which time the Hummaps web site is unavailable.
+The processing takes about 5 minutes during which time the 
+Hummaps web site is unavailable.
 
-#### Map Images
+### Map Images
 
 The update process described above assumes JPEG and TIFF map images and PDF files 
 have been properly named and copied to the Amazon S3 bucket. The EC2 Linux server
