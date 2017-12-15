@@ -3,6 +3,11 @@
 
 UPDATE_DIR = 'data/update60'
 
+XML_DATA_SURVEYOR = 'surveyor.xml'
+XML_DATA_SUBSECTIONLIST = 'subsectionlist.xml'
+XML_DATA_MAP = 'map.xml'
+XML_DATA_TRS = 'trs.xml'
+
 XLSX_DATA_SURVEYOR = 'data/surveyor.xlsx'
 XLSX_DATA_CC = 'data/cc.xlsx'
 XLSX_DATA_MAP = 'data/map.xlsx'

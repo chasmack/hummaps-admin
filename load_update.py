@@ -25,7 +25,7 @@ def load_update():
             );
         """.format(table_hollins_surveyor=TABLE_HOLLINS_SURVEYOR))
 
-        tree = ET.parse(join(UPDATE_DIR, 'surveyor.xml'))
+        tree = ET.parse(join(UPDATE_DIR, XML_DATA_SURVEYOR))
         root = tree.getroot()
         rows = []
         keys = ('Surveyor', 'lastname')
@@ -53,7 +53,7 @@ def load_update():
             );
         """.format(table_hollins_subsection_list=TABLE_HOLLINS_SUBSECTION_LIST))
 
-        tree = ET.parse(join(UPDATE_DIR, 'subsectionlist.xml'))
+        tree = ET.parse(join(UPDATE_DIR, XML_DATA_SUBSECTIONLIST))
         root = tree.getroot()
         rows = []
         keys = ('OrderCode', 'subsection')
@@ -88,7 +88,7 @@ def load_update():
             );
         """.format(table_hollins_map=TABLE_HOLLINS_MAP))
 
-        tree = ET.parse(join(UPDATE_DIR, 'map.xml'))
+        tree = ET.parse(join(UPDATE_DIR, XML_DATA_MAP))
         root = tree.getroot()
         rows = []
         keys = ('ID', 'maptype', 'BOOK', 'FIRSTPAGE', 'LASTPAGE', 'RECDATE',
@@ -111,7 +111,7 @@ def load_update():
         print('CREATE TABLE: {table_hollins_map_qq} ...'.format(table_hollins_map_qq=TABLE_HOLLINS_MAP_QQ))
 
         # get a list of the qq section columns from map
-        tree = ET.parse(join(UPDATE_DIR, 'map.xml'))
+        tree = ET.parse(join(UPDATE_DIR, XML_DATA_MAP))
         root = tree.getroot()
         skip_tags = (
             'id', 'maptype', 'book', 'firstpage', 'lastpage',
@@ -183,7 +183,7 @@ def load_update():
             );
         """.format(table_hollins_trs=TABLE_HOLLINS_TRS))
 
-        tree = ET.parse(join(UPDATE_DIR, 'trs.xml'))
+        tree = ET.parse(join(UPDATE_DIR, XML_DATA_TRS))
         root = tree.getroot()
         rows = []
         keys = ('ID', 'TOWNSHIP', 'RANGE', 'SECTION')
