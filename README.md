@@ -1,6 +1,6 @@
 # hummaps-admin 
 
-###Admin tools for Hummaps
+#### Admin tools for Hummaps
 
 These tools combine data from a number of sources to rebuild 
 the production hummaps datebase.
@@ -16,7 +16,7 @@ The structure of *hummaps* is described by the
 Other tables and file names are given in the constants definition file
 [const.py](https://github.com/chasmack/hummaps-admin/blob/master/const.py).
 
-###Source Data
+#### Source Data
 
 The MS Access database originally designed by Michael Hollins,
 typically named *tables.mdb*, is converted into XML using MS Access.
@@ -45,7 +45,7 @@ word AMENDED added.
 The Excel file *tract.xlsx* lists tract numbers for Record Maps.
 Not all Record Maps were assigned tract numbers.
 
-###Update Workflow
+#### Update Workflow
 
 Workflow is controlled by *update_hummaps.py*.
 
@@ -101,7 +101,7 @@ $ python3 update_hummaps.py
 
 The processing takes about 5 minutes during which time the Hummaps web site is unavailable.
 
-###Map Images
+#### Map Images
 
 The update process described above assumes JPEG and TIFF map images and PDF files 
 have been properly named and copied to the Amazon S3 bucket. The EC2 Linux server
