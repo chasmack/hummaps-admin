@@ -6,9 +6,9 @@ These tools combine data from a number of sources to rebuild
 the production hummaps datebase.
 The production hummaps database resides in a schema named *hummaps* 
 of a PostgreSQL database named *production*.
-A second schema named *hummaps-staging* is used to store production tables
-and intermediary tables and functions before the production tables are
-copied to *hummaps*.
+A second schema named *hummaps_staging* is used to store production 
+and staging tables and sql helper functions before the production 
+tables are copied to *hummaps*.
 
 The structure of *hummaps* is described by the 
 [Hummaps ER Diagram](https://github.com/chasmack/hummaps-admin/blob/master/docs/hummaps_ER.pdf).
@@ -23,10 +23,10 @@ typically named *tables.mdb*, is converted into XML using MS Access.
 These XML files are read into tables in *hummaps_staging*.
 
 The Excel file *surveyors.xlsx* lists information on surveyors and provides
-a link from the original Hollins surveyor name and the hummaps surveyor record.
+a link from the original Hollins surveyor name and hummaps *surveyor* record.
 For historical reasons multiple Hollins surveyors can point to a 
-single hummaps surveyor record. 
-In that case all fields except *hollins_fullname* must be identical.
+single *surveyor* record. 
+In that case all fields except *HOLLINS_FULLNAME* must be identical.
 
 The Excel file *cc.xlsx* lists Certificate of Corrections and the map
 to which they apply. The *RECDATE* field refers to the recording date
