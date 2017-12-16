@@ -1,11 +1,11 @@
 # hummaps-admin 
 
-### Update tool for Hummaps
+### Admin tool for Hummaps
 
-These tools combine data from a number of sources to rebuild 
+These procedures combine data from various sources to rebuild 
 the production hummaps datebase.
-The production hummaps database resides in a schema named *hummaps* 
-of a PostgreSQL database named *production*.
+The hummaps database resides in a schema named *hummaps* 
+in a PostgreSQL database named *production*.
 A second schema named *hummaps_staging* is used to store production 
 and staging tables and sql helper functions before the production 
 tables are copied to *hummaps*.
@@ -18,12 +18,12 @@ Other tables and file names are given in the constants definition file
 
 ### Source Data
 
-The MS Access database originally designed by Michael Hollins,
-typically named *tables.mdb*, is converted into XML using MS Access.
+Tables in the MS Access database originally designed by Michael Hollins, 
+*tables.mdb*, are converted into XML using MS Access.
 These XML files are read into tables in *hummaps_staging*.
 
 The Excel file *surveyors.xlsx* lists information on surveyors and provides
-a link from the original Hollins surveyor name and hummaps *surveyor* record.
+a link from the original Hollins surveyor name to a hummaps *surveyor* record.
 For historical reasons multiple Hollins surveyors can point to a 
 single *surveyor* record. 
 In that case all fields except HOLLINS_FULLNAME must be identical.
