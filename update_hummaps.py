@@ -13,7 +13,7 @@ from load_map_image import load_map_image
 from load_cc import load_cc
 from load_pdf import load_pdf
 from load_scan import load_scan
-from load_trs import load_trs
+from load_trs import load_trs, load_trs_parsed_subsection
 
 
 def apache2_stop():
@@ -309,14 +309,12 @@ if __name__ == '__main__':
     print('\nPerforming update ... ')
     startTime = time.time()
 
-    # Stop the web server
-    apache2_stop()
-
-    # Create the database and staging schema
-    init_database()
-    init_staging()
+    # Create the database and set up the users
+    # apache2_stop()
+    # init_database()
 
     # Load update data from Hollins and create staging tables
+    init_staging()
     load_update()
     load_map()
     create_funcs()
@@ -326,11 +324,11 @@ if __name__ == '__main__':
     load_pdf()
     load_scan()
     load_trs()
+    load_trs_parsed_subsection()
 
     # Copy tables and data from staging to production
+    apache2_stop()
     load_prod()
-
-    # Restart the web server
     apache2_start()
 
     endTime = time.time()

@@ -1,13 +1,13 @@
 import psycopg2
 from openpyxl import load_workbook
 import time
+import re
 
 from const import *
 
 # create_funcs.py - create some useful functions
 
 def create_funcs():
-
 
     with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
@@ -350,6 +350,149 @@ def create_funcs():
             schema_staging=SCHEMA_STAGING
         ))
         con.commit()
+
+# Python versions
+
+def subsec_str(v):
+    # Convert a 32-bit integer bit pattern to one or more subsection strings
+
+    bit_groups = [
+        {
+            0xffff: '1/1'
+        }, {
+            0x00ff: 'N/2',       0xff00: 'S/2',       0xcccc: 'E/2',       0x3333: 'W/2',
+        }, {
+            0x00cc: 'NE/4',      0xcc00: 'SE/4',      0x3300: 'SW/4',      0x0033: 'NW/4',
+            0x000f: 'N/2 N/2',   0x00f0: 'S/2 N/2',   0x0f00: 'N/2 S/2',   0xf000: 'S/2 S/2',
+            0x8888: 'E/2 E/2',   0x4444: 'W/2 E/2',   0x2222: 'E/2 W/2',   0x1111: 'W/2 W/2',
+        }, {
+            0x000c: 'N/2 NE/4',  0x00c0: 'S/2 NE/4',  0x0088: 'E/2 NE/4',  0x0044: 'W/2 NE/4',
+            0x0c00: 'N/2 SE/4',  0xc000: 'S/2 SE/4',  0x8800: 'E/2 SE/4',  0x4400: 'W/2 SE/4',
+            0x0300: 'N/2 SW/4',  0x3000: 'S/2 SW/4',  0x2200: 'E/2 SW/4',  0x1100: 'W/2 SW/4',
+            0x0003: 'N/2 NW/4',  0x0030: 'S/2 NW/4',  0x0022: 'E/2 NW/4',  0x0011: 'W/2 NW/4',
+        }, {
+            0x0008: 'NE/4 NE/4', 0x0080: 'SE/4 NE/4', 0x0040: 'SW/4 NE/4', 0x0004: 'NW/4 NE/4',
+            0x0800: 'NE/4 SE/4', 0x8000: 'SE/4 SE/4', 0x4000: 'SW/4 SE/4', 0x0400: 'NW/4 SE/4',
+            0x0200: 'NE/4 SW/4', 0x2000: 'SE/4 SW/4', 0x1000: 'SW/4 SW/4', 0x0100: 'NW/4 SW/4',
+            0x0002: 'NE/4 NW/4', 0x0020: 'SE/4 NW/4', 0x0010: 'SW/4 NW/4', 0x0001: 'NW/4 NW/4',
+        }
+    ]
+
+    v &= 0xffff
+    if v == 0:
+        return None
+
+    subsecs = []
+    for subsec_bits in bit_groups:
+        for pat in subsec_bits.keys():
+            if v & pat == pat:
+                subsecs.append(subsec_bits[pat])
+                v ^= pat
+                if v == 0:
+                    break
+    return subsecs
+
+
+def subsec_bits(subsec):
+    # Convert a subsection string into an integer bit pattern
+
+    # bit patterns for first (right) term
+    q_bits = {
+        'NE': 0x00CC, 'SE': 0xCC00, 'SW': 0x3300, 'NW': 0x0033,
+        'N': 0x00FF, 'S': 0xFF00, 'E': 0xCCCC, 'W': 0x3333
+    }
+
+    # bit patterns for second (left) term
+    qq_bits = {
+        'NE': 0x0A0A, 'SE': 0xA0A0, 'SW': 0x5050, 'NW': 0x0505,
+        'N': 0x0F0F, 'S': 0xF0F0, 'E': 0xAAAA, 'W': 0x5555
+    }
+
+    if type(subsec) is str:
+        subsec = [subsec]
+
+    bits = 0
+    for s in subsec:
+        if s == '1/1':
+            bits = 0xffff
+            break
+
+        # xx/4 and xx/4 xx/4
+        m = re.fullmatch('(?:([NS][EW])/4\s+)?([NS][EW])/4', s)
+        if m:
+            qq, q = m.groups()
+            if qq:
+                bits |= q_bits[q] & qq_bits[qq]
+            else:
+                bits |= q_bits[q]
+            continue
+
+        # x/2 and x/2 x/2
+        m = re.fullmatch('(?:([NSEW])/2\s+)?([NSEW])/2', s)
+        if m:
+            qq, q = m.groups()
+            if qq and re.match('E[NS]|[NS]W', ''.join(sorted([q,qq]))):
+                # this algorithm doesn't work for N/2 E/2, etc (and it shouldn't have to)
+                return None
+            if qq:
+                bits |= q_bits[q] & qq_bits[qq]
+            else:
+                bits |= q_bits[q]
+            continue
+
+        # x/2 xx/4
+        m = re.fullmatch('([NSEW])/2\s+([NS][EW])/4', s)
+        if m:
+            qq, q = m.groups()
+            bits |= q_bits[q] & qq_bits[qq]
+            continue
+
+        # no match
+        return None
+
+    return bits
+
+
+def township_number(s):
+    if s is None:
+        return None
+    m = re.fullmatch('T?(\d{1,2})([NS])', s.upper())
+    if m is None or int(m.group(1)) == 0:
+        return None
+    if m.group(2) == 'N':
+        return int(m.group(1)) + -1
+    else:
+        return int(m.group(1)) * -1
+
+
+def range_number(s):
+    if s is None:
+        return None
+    m = re.fullmatch('R?(\d{1})([EW])', s.upper())
+    if m is None or int(m.group(1)) == 0:
+        return None
+    if m.group(2) == 'E':
+        return int(m.group(1)) + -1
+    else:
+        return int(m.group(1)) * -1
+
+
+def township_str(v):
+    if v <  -99 or v > 98:
+        return None
+    if v < 0:
+        return '%dS' % (-1 * v)
+    else:
+        return '%dN' % (v + 1)
+
+
+def range_str(v):
+    if v <  -9 or v > 8:
+        return None
+    if v < 0:
+        return '%dW' % (-1 * v)
+    else:
+        return '%dE' % (v + 1)
 
 
 if __name__ == '__main__':

@@ -201,6 +201,35 @@ def load_map():
 
         print('UPDATE (TRACT NUMBER): ' + str(cur.rowcount) + ' rows effected.')
 
+        FULL_TOWNSHIP = ''.join((
+            'S1,S2,S3,S4,S5,S6,',
+            'S7,S8,S9,S10,S11,S12,',
+            'S13,S14,S15,S16,S17,S18,',
+            'S19,S20,S21,S22,S23,S24,',
+            'S25,S26,S27,S28,S29,S30,',
+            'S31,S32,S33,S34,S35,S36'
+        ))
+
+        cur.execute("""
+            WITH q1 AS (
+              SELECT m.id,
+                regexp_replace(m.description, '{full_township}', 'FULL TOWNSHIP') description
+              FROM {table_map} m
+              WHERE m.description ~ '{full_township}'
+            )
+            UPDATE {table_map} m
+            SET description = q1.description
+            FROM q1
+            WHERE m.id = q1.id
+            ;
+        """.format(
+            table_map=TABLE_MAP,
+            full_township=FULL_TOWNSHIP
+        ))
+        con.commit()
+
+        print('UPDATE (MAP DESCRIPTION): ' + str(cur.rowcount) + ' rows effected.')
+
         # Vacuum up dead tuples from the update
         tables = (
             TABLE_MAP,

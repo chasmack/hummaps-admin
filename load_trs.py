@@ -1,6 +1,10 @@
 import psycopg2
 from openpyxl import load_workbook
 import time
+import re
+
+from create_funcs import subsec_bits
+from create_funcs import township_number, range_number, township_str, range_str
 
 from const import *
 
@@ -165,12 +169,119 @@ def load_trs():
             cur.execute('VACUUM FREEZE ' + t)
 
 
+# load_trs_parsed_subsection.py - load additional trs subsection records parsed from map descriptions
+
+def load_trs_parsed_subsection():
+
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
+
+        # Patterns used with matches to break out sections with a subsection or a township/range.
+        SUBSEC_PATTERN = '(?:(?:[NS][EW]/4|[NSEW]/2)\s+)?(?:[NS][EW]/4|[NSEW]/2)\s+S\d{1,2}'
+        TR_PATTERN = '\d+[NS]\s*,\s*\d+[EW]'
+
+        # Get maps with no subsection data.
+        cur.execute("""
+            WITH q1 AS (
+              -- find maps with no subsection information
+              -- aggregate township/range/section records
+              SELECT m.id,
+                array_agg(concat_ws(' ',
+                  'S' || trs.sec::text,
+                  {function_township_str}(trs.tshp),
+                  {function_range_str}(trs.rng)
+                )) trs
+              FROM {table_map} m
+              JOIN {table_trs} trs ON trs.map_id = m.id
+              GROUP BY m.id
+              HAVING bit_or(subsec) IS NULL
+            )
+            SELECT m.id map_id, q1.trs,
+              unnest(regexp_matches(m.description, '{subsec_pattern}|{tr_pattern}', 'ig')) subsec
+            FROM {table_map} m
+            JOIN q1 USING (id)
+            WHERE m.description ~* '{subsec_pattern}'
+            ;
+        """.format(
+            table_trs=TABLE_TRS,
+            table_map=TABLE_MAP,
+            function_township_str=FUNCTION_TOWNSHIP_STR,
+            function_range_str=FUNCTION_RANGE_STR,
+            subsec_pattern=SUBSEC_PATTERN,
+            tr_pattern=TR_PATTERN
+        ))
+        con.commit()
+
+        maps = []
+        for map_id, trs, subsec in cur:
+            if len(maps) == 0 or maps[-1][0] != map_id or re.fullmatch(TR_PATTERN, maps[-1][-1][-1], re.IGNORECASE):
+                maps.append((map_id, trs, [subsec]))
+            else:
+                maps[-1][-1].append(subsec)
+
+        recs = []
+        for map_id, trs, subsecs in maps:
+            m = re.fullmatch('(\d+[NS]).*(\d+[EW])', subsecs[-1])
+            if m:
+                tshp, rng = m.groups()
+                subsecs.pop()
+            else:
+                tshp = rng = None
+
+            for ss in subsecs:
+                m = re.fullmatch('(.*[24])\s+(S\d+)', ss)
+                if m is None:
+                    print('>> PARSED SUBSEC: Bad section. id=%d subsec=%s' % (map_id, ss))
+                    continue
+                subsec, sec = m.groups()
+
+                if subsec_bits(subsec) is None:
+                    print('>> PARSED SUBSEC: Bad subsec: id=%d subsec=%s' % (map_id, ss))
+                    continue
+
+                if tshp is None or rng is None:
+                    # Get township and range from trs data
+                    n = 0
+                    for s, t, r in (d.split() for d in trs):
+                        if s == sec:
+                            tshp, rng = t, r
+                            n += 1
+                    if n == 0:
+                        print('>> PARSED SUBSEC: No trs record found. id=%d subsec=%s' % (map_id, ss))
+                        continue
+                    elif n > 1:
+                        print('>> PARSED SUBSEC: Multiple trs records found. id=%d subsec=%s' % (map_id, ss))
+                        continue
+                else:
+                    # Check township/range/section in trs data
+                    if '%s %s %s' % (sec, tshp, rng) not in trs:
+                        print('>> PARSED SUBSEC: Township/range/section not in trs. id=%d subsec=%s' % (map_id, ss))
+                        continue
+
+                recs.append((map_id, township_number(tshp), range_number(rng), int(sec[1:]), subsec_bits(subsec)))
+
+        cur.executemany("""
+            INSERT INTO {table_trs} (map_id, tshp, rng, sec, subsec, source_id)
+            VALUES (%s, %s, %s, %s, %s, {trs_source_parsed_subsection});
+        """.format(
+            table_trs=TABLE_TRS,
+            trs_source_parsed_subsection=TRS_SOURCE_PARSED_SUBSECTION
+        ), recs)
+        con.commit()
+
+        print('INSERT (PARSED SUBSEC): %d rows affected.' % cur.rowcount)
+
+        # Vacuum must run outside of a transaction
+        con.autocommit = True
+        cur.execute('VACUUM FREEZE ' + TABLE_TRS)
+
+
 if __name__ == '__main__':
 
     print('\nCreating staging tables ... ')
     startTime = time.time()
 
     load_trs()
+    load_trs_parsed_subsection()
 
     endTime = time.time()
     print('{0:.3f} sec'.format(endTime - startTime))
