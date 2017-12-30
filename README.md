@@ -59,11 +59,6 @@ subsection information is split out into its own table.
 Records from the Excel map data are added. A *maptype* table is also
 created from information in *const.py*.
 
-TODO: Functionality could be added to allow replacement of Hollins map
-records with data provided in the Excel map file. Currently if there is
-already a map record in Hollins the Excel map data will add a second duplicate
-record to *map*. 
-
 4. SQL utility functions are created. This must be done after the *map* and *maptype*
 tables have been created since some functions reference those tables.
 
@@ -83,16 +78,13 @@ is populated linking *cc* records to the JPEG image files in S3 storage.
 in S3 storage.
 
 10. The *trs* table is loaded from the Hollins trs and subsection data. 
-Additional *trs* records are added from the Excel map data. 
+Additional *trs* records are added from the Excel map data and parsed
+from map descriptions.
 A *source* table is also created from data in *const.py*. 
-
-TODO: Earlier versions of the procedures parsed section and subsection data from the
-map descriptions greatly increasing the number of map records with subsection data.
-That functionality has not yet been brought forward into this version of the update process.
 
 11. The production schema is created and the the production tables copied from staging.
 
-12. THe Apache web server is restarted. 
+12. The Apache web server is restarted. 
 
 The update process runs from a command line on the 
 EC2 Linux server hosting Hummaps -

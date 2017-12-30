@@ -304,6 +304,15 @@ def load_prod():
         for t in tables:
             cur.execute('VACUUM FREEZE ' + t)
 
+
+def show_totals():
+
+    with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
+
+        print('CREATE SCHEMA: {schema_prod} ...'.format(
+            schema_prod=SCHEMA_PROD))
+
+
 if __name__ == '__main__':
 
     print('\nPerforming update ... ')

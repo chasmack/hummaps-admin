@@ -169,17 +169,38 @@ def load_trs():
             cur.execute('VACUUM FREEZE ' + t)
 
 
-# load_trs_parsed_subsection.py - load additional trs subsection records parsed from map descriptions
+# load_trs_parsed_subsection.py
+#
+# Load additional trs subsection records parsed from map descriptions.
+# Map descriptions containing subdivisional location information might look like -
+#
+# NE/4 S6 & SE/4 S6 1N,2E + SE/4 S31 2N,2E  HWY 36 & VAN DUZEN RIVER
+#
+# The initial query parses the map description picking out subdivisional sections
+# and township/range qualifiers. The records passed to subsequent processing looks like -
+#
+#   id   |    subsec     |                              trs
+# -------+---------------+-----------------------------------------------------------------------
+#   5547 | NE/4 S6       | {"S7 1N 2E","S5 1N 2E","S6 1N 2E","S32 2N 2E","S31 2N 2E","S8 1N 2E"}
+#   5547 | SE/4 S6       | {"S7 1N 2E","S5 1N 2E","S6 1N 2E","S32 2N 2E","S31 2N 2E","S8 1N 2E"}
+#   5547 | 1N,2E         | {"S7 1N 2E","S5 1N 2E","S6 1N 2E","S32 2N 2E","S31 2N 2E","S8 1N 2E"}
+#   5547 | SE/4 S31      | {"S7 1N 2E","S5 1N 2E","S6 1N 2E","S32 2N 2E","S31 2N 2E","S8 1N 2E"}
+#   5547 | 2N,2E         | {"S7 1N 2E","S5 1N 2E","S6 1N 2E","S32 2N 2E","S31 2N 2E","S8 1N 2E"}
+#
+# The township/range is often missing from the description. In that case the information
+# from existing non-subsection records is used to determine the township and range.
+# If township/range information is present in the description it is compared with
+# the non-subsection trs data to validate the township/range/section.
 
 def load_trs_parsed_subsection():
 
     with psycopg2.connect(DSN_PROD) as con, con.cursor() as cur:
 
         # Patterns used with matches to break out sections with a subsection or a township/range.
-        SUBSEC_PATTERN = '(?:(?:[NS][EW]/4|[NSEW]/2)\s+)?(?:[NS][EW]/4|[NSEW]/2)\s+S\d{1,2}'
+        SUBSEC_PATTERN = '(?:(?:[NS][EW]/4|[NSEW]/2)\s*)?(?:[NS][EW]/4|[NSEW]/2)\s*S\d{1,2}'
         TR_PATTERN = '\d+[NS]\s*,\s*\d+[EW]'
 
-        # Get maps with no subsection data.
+        # Get maps with no subsection data and a subsection in the description.
         cur.execute("""
             WITH q1 AS (
               -- find maps with no subsection information
@@ -197,8 +218,8 @@ def load_trs_parsed_subsection():
             )
             SELECT m.id map_id, q1.trs,
               unnest(regexp_matches(m.description, '{subsec_pattern}|{tr_pattern}', 'ig')) subsec
-            FROM {table_map} m
-            JOIN q1 USING (id)
+            FROM q1
+            JOIN {table_map} m USING (id)
             WHERE m.description ~* '{subsec_pattern}'
             ;
         """.format(
@@ -211,6 +232,10 @@ def load_trs_parsed_subsection():
         ))
         con.commit()
 
+        # Combine records into maps with a list of subsections.
+        # If a township/range qualifier is found it is placed at the end
+        # of the subsection list and a new map list started. Only some lists
+        # will have a township/range qualifier as their last element.
         maps = []
         for map_id, trs, subsec in cur:
             if len(maps) == 0 or maps[-1][0] != map_id or re.fullmatch(TR_PATTERN, maps[-1][-1][-1], re.IGNORECASE):
@@ -218,8 +243,11 @@ def load_trs_parsed_subsection():
             else:
                 maps[-1][-1].append(subsec)
 
+        # Convert each subsection in the subsection list into a trs record.
         recs = []
         for map_id, trs, subsecs in maps:
+
+            # Check if last element of the subsection list is a township/raange qualifier.
             m = re.fullmatch('(\d+[NS]).*(\d+[EW])', subsecs[-1])
             if m:
                 tshp, rng = m.groups()
@@ -228,17 +256,21 @@ def load_trs_parsed_subsection():
                 tshp = rng = None
 
             for ss in subsecs:
-                m = re.fullmatch('(.*[24])\s+(S\d+)', ss)
+
+                # Break out section and subsection information
+                m = re.fullmatch('(.*[24])\s*(S\d+)', ss)
                 if m is None:
                     print('>> PARSED SUBSEC: Bad section. id=%d subsec=%s' % (map_id, ss))
                     continue
                 subsec, sec = m.groups()
 
+                # Make sure the subsection portion converts correctly.
                 if subsec_bits(subsec) is None:
                     print('>> PARSED SUBSEC: Bad subsec: id=%d subsec=%s' % (map_id, ss))
                     continue
 
                 if tshp is None or rng is None:
+
                     # Get township and range from trs data
                     n = 0
                     for s, t, r in (d.split() for d in trs):
@@ -251,8 +283,9 @@ def load_trs_parsed_subsection():
                     elif n > 1:
                         print('>> PARSED SUBSEC: Multiple trs records found. id=%d subsec=%s' % (map_id, ss))
                         continue
+
                 else:
-                    # Check township/range/section in trs data
+                    # Verify township/range/section is in the trs data.
                     if '%s %s %s' % (sec, tshp, rng) not in trs:
                         print('>> PARSED SUBSEC: Township/range/section not in trs. id=%d subsec=%s' % (map_id, ss))
                         continue
