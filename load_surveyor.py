@@ -44,7 +44,6 @@ def load_surveyor():
                     XLSX_DATA_SURVEYOR, surveyor_fullname))
                 exit(-1)
 
-
         # Create and populate the surveyor table
         print('CREATE TABLE: {table_surveyor} ...'.format(table_surveyor=TABLE_SURVEYOR))
 
@@ -71,6 +70,18 @@ def load_surveyor():
         con.commit()
 
         print('INSERT: %d rows affected.' % (cur.rowcount))
+
+        # Check the surveyor fullnames.
+        cur.execute("""
+            SELECT fullname, firstname, secondname, thirdname, lastname, suffix
+            FROM {table_surveyor}
+            WHERE fullname != concat_ws(' ', firstname, secondname, thirdname, lastname, suffix)
+            ;
+        """.format(table_surveyor=TABLE_SURVEYOR))
+        con.commit()
+
+        for row in cur:
+            print('>> BAD SURVEYOR FULLNAME: "%s (%s)"' % (row[0], ' '.join(filter(lambda n: n is not None, row[1:]))))
 
         # Create and popluate a table mapping hollins fullname to surveyor fullname
         print('CREATE TABLE: {table_hollins_fullname} ...'.format(table_hollins_fullname=TABLE_HOLLINS_FULLNAME))
