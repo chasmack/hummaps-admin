@@ -31,6 +31,11 @@ def init_database():
 
     sql = """
         DROP DATABASE IF EXISTS {database_prod};
+        DROP ROLE IF EXISTS {user_admin};
+        CREATE ROLE {user_admin} LOGIN NOINHERIT;
+        DROP ROLE IF EXISTS {user_prod};
+        CREATE ROLE {user_prod}
+          LOGIN NOINHERIT PASSWORD '{password_prod}';
         CREATE DATABASE {database_prod}
             OWNER {user_admin}
             ENCODING 'UTF8'
@@ -38,9 +43,6 @@ def init_database():
             LC_COLLATE 'en_US.UTF-8'
             LC_CTYPE'en_US.UTF-8'
         ;
-        DROP ROLE IF EXISTS {user_prod};
-        CREATE ROLE {user_prod}
-          LOGIN NOINHERIT PASSWORD '{password_prod}';
     """.format(
         database_prod=DATABASE_PROD,
         user_admin=USER_ADMIN,
