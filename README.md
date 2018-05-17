@@ -90,6 +90,7 @@ The update process runs from a command line on the
 EC2 Linux server hosting Hummaps -
 
 $ cd /home/ubuntu/www/hummaps-staging
+
 $ python3 update_hummaps.py
 
 The processing takes about 5 minutes during which time the 
