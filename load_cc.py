@@ -122,7 +122,7 @@ def load_cc():
         cur.executemany("""
             WITH q1 AS (
                 SELECT
-                  (%s)::text doc_number,
+                  '/' || (%s)::text doc_number,
                   (%s)::integer page,
                   (%s)::text imagefile
             ), q2 AS (
