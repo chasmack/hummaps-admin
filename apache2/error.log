@@ -1,0 +1,172 @@
+[Fri Feb 15 06:25:02.758598 2019] [mpm_event:notice] [pid 7545:tid 1992630272] AH00489: Apache/2.4.25 (Raspbian) OpenSSL/1.0.2l mod_wsgi/4.5.11 Python/3.5 configured -- resuming normal operations
+[Fri Feb 15 06:25:02.758738 2019] [core:notice] [pid 7545:tid 1992630272] AH00094: Command line: '/usr/sbin/apache2'
+[Fri Feb 15 14:21:34.256133 2019] [mpm_event:notice] [pid 7545:tid 1992630272] AH00491: caught SIGTERM, shutting down
+[Fri Feb 15 14:21:34.542076 2019] [mpm_event:notice] [pid 10460:tid 1992077312] AH00489: Apache/2.4.25 (Raspbian) OpenSSL/1.0.2l mod_wsgi/4.5.11 Python/3.5 configured -- resuming normal operations
+[Fri Feb 15 14:21:34.542412 2019] [core:notice] [pid 10460:tid 1992077312] AH00094: Command line: '/usr/sbin/apache2'
+[Fri Feb 15 16:03:03.028747 2019] [mpm_event:notice] [pid 10460:tid 1992077312] AH00491: caught SIGTERM, shutting down
+[Fri Feb 15 16:03:03.307348 2019] [mpm_event:notice] [pid 12803:tid 1992724480] AH00489: Apache/2.4.25 (Raspbian) OpenSSL/1.0.2l mod_wsgi/4.5.11 Python/3.5 configured -- resuming normal operations
+[Fri Feb 15 16:03:03.307684 2019] [core:notice] [pid 12803:tid 1992724480] AH00094: Command line: '/usr/sbin/apache2'
+[Fri Feb 15 16:08:32.238298 2019] [mpm_event:notice] [pid 12803:tid 1992724480] AH00491: caught SIGTERM, shutting down
+[Fri Feb 15 16:08:32.509791 2019] [mpm_event:notice] [pid 13234:tid 1991946240] AH00489: Apache/2.4.25 (Raspbian) OpenSSL/1.0.2l mod_wsgi/4.5.11 Python/3.5 configured -- resuming normal operations
+[Fri Feb 15 16:08:32.510115 2019] [core:notice] [pid 13234:tid 1991946240] AH00094: Command line: '/usr/sbin/apache2'
+[Fri Feb 15 16:08:42.570617 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935] mod_wsgi (pid=13237): Target WSGI script '/var/www/html/hummaps/hummaps.wsgi' cannot be loaded as Python module., referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.570903 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935] mod_wsgi (pid=13237): Exception occurred processing WSGI script '/var/www/html/hummaps/hummaps.wsgi'., referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.580939 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935] Traceback (most recent call last):, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581340 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/var/www/html/hummaps/hummaps.wsgi", line 12, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581369 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     from hummaps import app as application, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581418 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/var/www/html/hummaps/hummaps/__init__.py", line 27, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581442 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     import hummaps.views, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581487 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/var/www/html/hummaps/hummaps/views.py", line 7, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581509 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     from hummaps.xhr import xhr_request, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581554 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/var/www/html/hummaps/hummaps/xhr.py", line 3, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581577 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     from hummaps.models import Surveyor, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581662 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/var/www/html/hummaps/hummaps/models.py", line 10, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581683 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     class MapImage(Base):, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581727 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/api.py", line 71, in __init__, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581749 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     _as_declarative(cls, classname, cls.__dict__), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581794 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 128, in _as_declarative, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581815 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     _MapperConfig.setup_mapping(cls, classname, dict_), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581860 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 156, in setup_mapping, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581881 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     cfg_cls(cls_, classname, dict_), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581924 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 184, in __init__, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581946 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     self._setup_table(), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.581989 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 530, in _setup_table, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.582010 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     **table_kw, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.582053 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/sql/schema.py", line 451, in __new__, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.582074 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935]     "existing Table object." % key, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:42.582166 2019] [wsgi:error] [pid 13237:tid 1969222704] [client 10.0.0.17:55935] sqlalchemy.exc.InvalidRequestError: Table 'hummaps.map_image' is already defined for this MetaData instance.  Specify 'extend_existing=True' to redefine options and columns on an existing Table object., referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.731995 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936] mod_wsgi (pid=13238): Target WSGI script '/var/www/html/hummaps/hummaps.wsgi' cannot be loaded as Python module., referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.732244 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936] mod_wsgi (pid=13238): Exception occurred processing WSGI script '/var/www/html/hummaps/hummaps.wsgi'., referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742168 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936] Traceback (most recent call last):, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742574 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/var/www/html/hummaps/hummaps.wsgi", line 12, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742600 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     from hummaps import app as application, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742647 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/var/www/html/hummaps/hummaps/__init__.py", line 27, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742669 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     import hummaps.views, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742713 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/var/www/html/hummaps/hummaps/views.py", line 7, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742734 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     from hummaps.xhr import xhr_request, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742778 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/var/www/html/hummaps/hummaps/xhr.py", line 3, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742798 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     from hummaps.models import Surveyor, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742842 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/var/www/html/hummaps/hummaps/models.py", line 10, in <module>, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742863 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     class MapImage(Base):, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742905 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/api.py", line 71, in __init__, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742928 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     _as_declarative(cls, classname, cls.__dict__), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742971 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 128, in _as_declarative, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.742994 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     _MapperConfig.setup_mapping(cls, classname, dict_), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743038 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 156, in setup_mapping, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743059 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     cfg_cls(cls_, classname, dict_), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743134 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 184, in __init__, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743156 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     self._setup_table(), referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743199 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 530, in _setup_table, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743220 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     **table_kw, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743263 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/sql/schema.py", line 451, in __new__, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743284 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936]     "existing Table object." % key, referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:08:45.743376 2019] [wsgi:error] [pid 13238:tid 1969222704] [client 10.0.0.17:55936] sqlalchemy.exc.InvalidRequestError: Table 'hummaps.map_image' is already defined for this MetaData instance.  Specify 'extend_existing=True' to redefine options and columns on an existing Table object., referer: https://cmack.org:6200/?q=n%2F2+s4+4n+1w+%2B+s%2F2+s33+5n+1w
+[Fri Feb 15 16:13:19.025935 2019] [wsgi:error] [pid 13237:tid 1960834096] /usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/clsregistry.py:128: SAWarning: This declarative base already contains a class with the same class name and module name as hummaps.models.MapImage, and will be replaced in the string-lookup table.
+[Fri Feb 15 16:13:19.026109 2019] [wsgi:error] [pid 13237:tid 1960834096]   % (item.__module__, item.__name__)
+[Fri Feb 15 16:13:19.028422 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965] mod_wsgi (pid=13237): Target WSGI script '/var/www/html/hummaps/hummaps.wsgi' cannot be loaded as Python module.
+[Fri Feb 15 16:13:19.028690 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965] mod_wsgi (pid=13237): Exception occurred processing WSGI script '/var/www/html/hummaps/hummaps.wsgi'.
+[Fri Feb 15 16:13:19.030443 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965] Traceback (most recent call last):
+[Fri Feb 15 16:13:19.031058 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/var/www/html/hummaps/hummaps.wsgi", line 12, in <module>
+[Fri Feb 15 16:13:19.031108 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     from hummaps import app as application
+[Fri Feb 15 16:13:19.031201 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/var/www/html/hummaps/hummaps/__init__.py", line 27, in <module>
+[Fri Feb 15 16:13:19.031245 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     import hummaps.views
+[Fri Feb 15 16:13:19.031333 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/var/www/html/hummaps/hummaps/views.py", line 7, in <module>
+[Fri Feb 15 16:13:19.031376 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     from hummaps.xhr import xhr_request
+[Fri Feb 15 16:13:19.031464 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/var/www/html/hummaps/hummaps/xhr.py", line 3, in <module>
+[Fri Feb 15 16:13:19.031507 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     from hummaps.models import Surveyor
+[Fri Feb 15 16:13:19.031596 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/var/www/html/hummaps/hummaps/models.py", line 10, in <module>
+[Fri Feb 15 16:13:19.031688 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     class MapImage(Base):
+[Fri Feb 15 16:13:19.031775 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/api.py", line 71, in __init__
+[Fri Feb 15 16:13:19.031817 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     _as_declarative(cls, classname, cls.__dict__)
+[Fri Feb 15 16:13:19.031903 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 128, in _as_declarative
+[Fri Feb 15 16:13:19.031947 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     _MapperConfig.setup_mapping(cls, classname, dict_)
+[Fri Feb 15 16:13:19.032031 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 156, in setup_mapping
+[Fri Feb 15 16:13:19.032073 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     cfg_cls(cls_, classname, dict_)
+[Fri Feb 15 16:13:19.032157 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 184, in __init__
+[Fri Feb 15 16:13:19.032198 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     self._setup_table()
+[Fri Feb 15 16:13:19.032282 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 530, in _setup_table
+[Fri Feb 15 16:13:19.032324 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     **table_kw
+[Fri Feb 15 16:13:19.032407 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/sql/schema.py", line 451, in __new__
+[Fri Feb 15 16:13:19.032448 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965]     "existing Table object." % key
+[Fri Feb 15 16:13:19.032603 2019] [wsgi:error] [pid 13237:tid 1960834096] [client 10.0.0.17:55965] sqlalchemy.exc.InvalidRequestError: Table 'hummaps.map_image' is already defined for this MetaData instance.  Specify 'extend_existing=True' to redefine options and columns on an existing Table object.
+[Fri Feb 15 16:13:19.093343 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966] mod_wsgi (pid=13237): Target WSGI script '/var/www/html/hummaps/hummaps.wsgi' cannot be loaded as Python module., referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.093876 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966] mod_wsgi (pid=13237): Exception occurred processing WSGI script '/var/www/html/hummaps/hummaps.wsgi'., referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.095647 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966] Traceback (most recent call last):, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096256 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/var/www/html/hummaps/hummaps.wsgi", line 12, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096302 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     from hummaps import app as application, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096393 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/var/www/html/hummaps/hummaps/__init__.py", line 27, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096436 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     import hummaps.views, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096522 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/var/www/html/hummaps/hummaps/views.py", line 7, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096614 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     from hummaps.xhr import xhr_request, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096701 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/var/www/html/hummaps/hummaps/xhr.py", line 3, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096742 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     from hummaps.models import Surveyor, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096828 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/var/www/html/hummaps/hummaps/models.py", line 10, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096869 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     class MapImage(Base):, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096954 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/api.py", line 71, in __init__, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.096997 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     _as_declarative(cls, classname, cls.__dict__), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097083 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 128, in _as_declarative, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097126 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     _MapperConfig.setup_mapping(cls, classname, dict_), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097212 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 156, in setup_mapping, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097254 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     cfg_cls(cls_, classname, dict_), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097340 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 184, in __init__, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097382 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     self._setup_table(), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097468 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 530, in _setup_table, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097509 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     **table_kw, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097594 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/sql/schema.py", line 451, in __new__, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097635 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966]     "existing Table object." % key, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:19.097792 2019] [wsgi:error] [pid 13237:tid 1952445488] [client 10.0.0.17:55966] sqlalchemy.exc.InvalidRequestError: Table 'hummaps.map_image' is already defined for this MetaData instance.  Specify 'extend_existing=True' to redefine options and columns on an existing Table object., referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:32.847069 2019] [mpm_event:notice] [pid 13234:tid 1991946240] AH00491: caught SIGTERM, shutting down
+[Fri Feb 15 16:13:33.134553 2019] [mpm_event:notice] [pid 13499:tid 1992478720] AH00489: Apache/2.4.25 (Raspbian) OpenSSL/1.0.2l mod_wsgi/4.5.11 Python/3.5 configured -- resuming normal operations
+[Fri Feb 15 16:13:33.134879 2019] [core:notice] [pid 13499:tid 1992478720] AH00094: Command line: '/usr/sbin/apache2'
+[Fri Feb 15 16:13:40.083490 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969] mod_wsgi (pid=13503): Target WSGI script '/var/www/html/hummaps/hummaps.wsgi' cannot be loaded as Python module.
+[Fri Feb 15 16:13:40.083826 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969] mod_wsgi (pid=13503): Exception occurred processing WSGI script '/var/www/html/hummaps/hummaps.wsgi'.
+[Fri Feb 15 16:13:40.093721 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969] Traceback (most recent call last):
+[Fri Feb 15 16:13:40.094119 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/var/www/html/hummaps/hummaps.wsgi", line 12, in <module>
+[Fri Feb 15 16:13:40.094147 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     from hummaps import app as application
+[Fri Feb 15 16:13:40.094195 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/var/www/html/hummaps/hummaps/__init__.py", line 27, in <module>
+[Fri Feb 15 16:13:40.094217 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     import hummaps.views
+[Fri Feb 15 16:13:40.094260 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/var/www/html/hummaps/hummaps/views.py", line 7, in <module>
+[Fri Feb 15 16:13:40.094282 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     from hummaps.xhr import xhr_request
+[Fri Feb 15 16:13:40.094325 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/var/www/html/hummaps/hummaps/xhr.py", line 3, in <module>
+[Fri Feb 15 16:13:40.094346 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     from hummaps.models import Surveyor
+[Fri Feb 15 16:13:40.094389 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/var/www/html/hummaps/hummaps/models.py", line 10, in <module>
+[Fri Feb 15 16:13:40.094410 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     class MapImage(Base):
+[Fri Feb 15 16:13:40.094453 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/api.py", line 71, in __init__
+[Fri Feb 15 16:13:40.094475 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     _as_declarative(cls, classname, cls.__dict__)
+[Fri Feb 15 16:13:40.094518 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 128, in _as_declarative
+[Fri Feb 15 16:13:40.094540 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     _MapperConfig.setup_mapping(cls, classname, dict_)
+[Fri Feb 15 16:13:40.094584 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 156, in setup_mapping
+[Fri Feb 15 16:13:40.094605 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     cfg_cls(cls_, classname, dict_)
+[Fri Feb 15 16:13:40.094649 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 184, in __init__
+[Fri Feb 15 16:13:40.094670 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     self._setup_table()
+[Fri Feb 15 16:13:40.094713 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 530, in _setup_table
+[Fri Feb 15 16:13:40.094734 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     **table_kw
+[Fri Feb 15 16:13:40.094776 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/sql/schema.py", line 451, in __new__
+[Fri Feb 15 16:13:40.094798 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969]     "existing Table object." % key
+[Fri Feb 15 16:13:40.094927 2019] [wsgi:error] [pid 13503:tid 1969222704] [client 10.0.0.17:55969] sqlalchemy.exc.InvalidRequestError: Table 'hummaps.map_image' is already defined for this MetaData instance.  Specify 'extend_existing=True' to redefine options and columns on an existing Table object.
+[Fri Feb 15 16:13:43.255359 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971] mod_wsgi (pid=13504): Target WSGI script '/var/www/html/hummaps/hummaps.wsgi' cannot be loaded as Python module., referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.255594 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971] mod_wsgi (pid=13504): Exception occurred processing WSGI script '/var/www/html/hummaps/hummaps.wsgi'., referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.265528 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971] Traceback (most recent call last):, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.265928 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/var/www/html/hummaps/hummaps.wsgi", line 12, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.265955 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     from hummaps import app as application, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266001 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/var/www/html/hummaps/hummaps/__init__.py", line 27, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266023 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     import hummaps.views, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266068 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/var/www/html/hummaps/hummaps/views.py", line 7, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266089 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     from hummaps.xhr import xhr_request, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266131 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/var/www/html/hummaps/hummaps/xhr.py", line 3, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266152 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     from hummaps.models import Surveyor, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266196 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/var/www/html/hummaps/hummaps/models.py", line 10, in <module>, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266217 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     class MapImage(Base):, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266259 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/api.py", line 71, in __init__, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266280 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     _as_declarative(cls, classname, cls.__dict__), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266324 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 128, in _as_declarative, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266345 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     _MapperConfig.setup_mapping(cls, classname, dict_), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266388 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 156, in setup_mapping, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266409 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     cfg_cls(cls_, classname, dict_), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266483 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 184, in __init__, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266504 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     self._setup_table(), referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266547 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/ext/declarative/base.py", line 530, in _setup_table, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266568 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     **table_kw, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266610 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]   File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/sql/schema.py", line 451, in __new__, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266630 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971]     "existing Table object." % key, referer: https://cmack.org:6200/
+[Fri Feb 15 16:13:43.266722 2019] [wsgi:error] [pid 13504:tid 1969222704] [client 10.0.0.17:55971] sqlalchemy.exc.InvalidRequestError: Table 'hummaps.map_image' is already defined for this MetaData instance.  Specify 'extend_existing=True' to redefine options and columns on an existing Table object., referer: https://cmack.org:6200/
