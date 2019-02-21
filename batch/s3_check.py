@@ -1,26 +1,30 @@
 import boto3
 import time
 
-def s3_check():
 
-    S3_BUCKET_MAPS = 'maps.hummaps.com'
+S3_BUCKET_MAPS = 'maps.hummaps.com'
+MAPS_LIST = r'd:\Projects\Python\hummaps-admin\batch\imagefiles.txt'
 
-    # Get a list of cc images from the maps bucket
+def s3_imagefiles():
+
+    # Get a list of imagefiles from the maps bucket
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(S3_BUCKET_MAPS)
 
-    # Put each imagefile in a length = 1 list to be later extended
-    imagefiles = list([obj.key] for obj in bucket.objects.filter(Prefix='map/cc/'))
+    with open(MAPS_LIST, 'w') as f:
+        for maptype in ('cc', 'cr', 'hm', 'mm', 'pm', 'rm', 'rs', 'ur'):
 
-    for f in imagefiles:
-        print(f[0])
+            imagefiles = list([obj.key] for obj in bucket.objects.filter(Prefix='map/%s/' % maptype))
+
+            for img in imagefiles:
+                f.write('/' + img[0] + '\n')
 
 if __name__ == '__main__':
 
-    print('\nGeting CC images ... ')
+    print('\nGeting imagefiles ... ')
     startTime = time.time()
 
-    s3_check()
+    s3_imagefiles()
 
     endTime = time.time()
     print('{0:.3f} sec'.format(endTime - startTime))

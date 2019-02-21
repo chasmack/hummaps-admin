@@ -1,0 +1,445 @@
+             n1             |           n2           
+----------------------------+------------------------
+ R Aanrud                   | R AANRUD
+ H C Acheson                | H C ACHESON
+ Newton Ackerman            | NEWTON ACKERMAN
+ Roger Louis Ackerman       | ROGER L ACKERMAN
+ J A Adams                  | J A ADAMS
+ Edith S Albee              | EDITH S ALBEE
+ Gary Alan Alkire           | GARY A ALKIRE
+ Benjamin T Anderson        | BENJAMIN T ANDERSON
+ William Anderson           | WILLIAM ANDERSON
+ William Marion Andrews     | WILLIAM M ANDREWS
+ D R Averill                | D R AVERILL
+ Alonzo Bacon               | ALONZO BACON
+ E Bahr                     | E BAHR
+ Allan Michael Baird        | ALLAN M BAIRD
+ James Harold Baker         | JAMES H BAKER
+ Robert Harold Baker        | ROBERT H BAKER
+ A Bannister                | A BANNISTER
+ Loretta Joyce Banta        | LORETTA J BANTA
+ Jerry E Barrett            | JERRY E BARRETT
+ M S Bartell                | M S BARTELL
+ Howard H Bashford          | HOWARD H BASHFORD
+ D Bauer                    | D BAUER
+ Richard Earl Beale         | RICHARD E BEALE
+ Ralph A Beebee             | RALPH A BEEBEE
+ Carl F William Beed        | CARL F W BEED
+ Melvin W Berning           | MELVIN W BERNING
+ John Winston Blodger       | JOHN W BLODGER
+ Robert Leland Bly          | ROBERT L BLY
+ Ralph L Boehne             | RALPH L BOEHNE
+ Arne B Bones               | ARNE B BONES
+ Carl Albert Bonomini       | CARL A BONOMINI
+ Harmon S Bonte             | HARMON S BONTE
+ Gary Dean Boughton         | GARY D BOUGHTON
+ J W Bowden                 | J W BOWDEN
+ Hubert I Bower             | HUBERT I BOWER
+ G Bradford                 | G BRADFORD
+ David Read Bradley         | DAVID R BRADLEY
+ James Clinton Brainard     | JAMES C BRAINARD
+ James Gordon Bray          | JAMES G BRAY
+ Alex Brizard               | ALEX BRIZARD
+ Robert W Bronkall          | ROBERT W BRONKALL
+ Kevin Burnell Bronson      | KEVIN B BRONSON
+ A Brown                    | A BROWN
+ Karl Henry Brown           | KARL H BROWN
+ Robert James Brown         | ROBERT J BROWN
+ Howard William Brunner     | HOWARD W BRUNNER
+ S Brunt                    | S BRUNT
+ A Bryan                    | A BRYAN
+ Lloyd Laverne Buck Jr      | LLOYD L BUCK JR
+ Jesse Niles Buffington     | JESSE N BUFFINGTON
+ Jay Allen Burgess          | JAY A BURGESS
+ C Burt                     | C BURT
+ David L Bushnell           | DAVID L BUSHNELL
+ Donald E Bushnell          | DONALD E BUSHNELL
+ Allen Wayne Campbell       | ALLEN W CAMPBELL
+ Donald Spencer Campbell    | DONALD S CAMPBELL
+ Q Campbell                 | Q CAMPBELL
+ B Capell                   | B CAPELL
+ L Carleton                 | L CARLETON
+ David H Carlson            | DAVID H CARLSON
+ J Carroll                  | J CARROLL
+ W Cathie                   | W CATHIE
+ Robert Lee Chandler        | ROBERT L CHANDLER
+ Dennis P Chapman           | DENNIS P CHAPMAN
+ I Chapman                  | I CHAPMAN
+ G Chittick                 | G CHITTICK
+ M Clarke                   | M CLARKE
+ R Clifford                 | R CLIFFORD
+ James W Cohoon             | JAMES W COHOON
+ W Colisch                  | W COLISCH
+ W Conklin                  | W CONKLIN
+ J Conkright                | J CONKRIGHT
+ G Conners                  | G CONNERS
+ Guy John Conversano        | GUY J CONVERSANO
+ Fred Willard Cook          | FRED W COOK
+ F Cope                     | F COPE
+ L Coppin                   | L COPPIN
+ W Corbitt                  | W CORBITT
+ R Coughlan                 | R COUGHLAN
+ James W Crabtree           | JAMES W CRABTREE
+ David A Crivelli           | DAVID A CRIVELLI
+ Robert William Dahl        | ROBERT W DAHL
+ Richard Brian Davis        | RICHARD B DAVIS
+ Terry Austin Davis         | TERRY A DAVIS
+ Kenneth Grover Davlin      | KENNETH G DAVLIN
+ Rodney Dale Dawson         | RODNEY D DAWSON
+ P Day                      | P DAY
+ S Dean                     | S DEAN
+ J Dearing                  | J DEARING
+ J Degraff                  | J DEGRAFF
+ Frank Charles Demling Jr   | FRANK C DEMLING JR
+ William James Dinsmore     | WILLIAM J DINSMORE
+ D Dodge                    | D DODGE
+ A Dolf                     | A DOLF
+ J Dominick                 | J DOMINICK
+ Stephen K Drake            | STEPHEN K DRAKE
+ R Ducret                   | R DUCRET
+ J Dudley                   | J DUDLEY
+ D Dukleth                  | D DUKLETH
+ Michael David Eagan        | MICHAEL D EAGAN
+ D Eason                    | D EASON
+ R Ecker                    | R ECKER
+ James Quincy Eddy Jr       | JAMES Q EDDY JR
+ P Ehlert                   | P EHLERT
+ A Elam                     | A ELAM
+ M Eldridge                 | M ELDRIDGE
+ M Eli                      | M ELI
+ N Ellery                   | N ELLERY
+ R Ellis                    | R ELLIS
+ W Elsemore                 | W ELSEMORE
+ John P Engvall             | JOHN P ENGVALL
+ J Erikson                  | J ERIKSON
+ J Facey                    | J FACEY
+ W Fauntleroy               | W FAUNTLEROY
+ Paul Francis Ferguson Jr   | PAUL F FERGUSON JR
+ J Feyder                   | J FEYDER
+ L Fields                   | L FIELDS
+ O Finley                   | O FINLEY
+ K Fisher                   | K FISHER
+ S Fleckner                 | S FLECKNER
+ Randall Scott Forbes       | RANDALL S FORBES
+ S Foreman                  | S FOREMAN
+ Jon Douglas Forsyth        | JON D FORSYTH
+ T Foss                     | T FOSS
+ A Fowler                   | A FOWLER
+ D Francis                  | D FRANCIS
+ O Frankie                  | O FRANKIE
+ W Friedhoff                | W FRIEDHOFF
+ Charles William Gallaty    | CHARLES W GALLATY
+ C Galloway                 | C GALLOWAY
+ E Gardner                  | E GARDNER
+ Ronald Charles Garton      | RONALD C GARTON
+ E Gastman                  | E GASTMAN
+ J Gawronski                | J GAWRONSKI
+ F T Georgeson              | F T GEORGESON
+ Jeffery Silvio Ghilardi    | JEFFERY S GHILARDI
+ J Giacomini                | J GIACOMINI
+ J Gilcrest                 | J GILCREST
+ W Gillaspy                 | W GILLASPY
+ J Gilson                   | J GILSON
+ Gary Dean Gogos            | GARY D GOGOS
+ Ted Gano Goldsmith         | TED G GOLDSMITH
+ G Goodson                  | G GOODSON
+ Edward John Gorge Jr       | EDWARD J GORGE JR
+ Edward John Gorge Sr       | EDWARD J GORGE SR
+ K Gray                     | K GRAY
+ F Green                    | F GREEN
+ D Greenwell                | D GREENWELL
+ P Griffin                  | P GRIFFIN
+ Gerald H Griffith          | GERALD H GRIFFITH
+ Frank L Grimm              | FRANK L GRIMM
+ J Grippi                   | J GRIPPI
+ David L Gustafson          | DAVID L GUSTAFSON
+ A Guthrie                  | A GUTHRIE
+ Philip A Gutierrez Jr      | PHILIP A GUTIERREZ JR
+ Raymond G Haberstock       | RAYMOND G HABERSTOCK
+ D Haller                   | D HALLER
+ R Hamilton                 | R HAMILTON
+ C Hamon                    | C HAMON
+ H Hannah                   | H HANNAH
+ Randy Gregg Haralson       | RANDY G HARALSON
+ James M Harcharik          | JAMES M HARCHARIK
+ J Hardison                 | J HARDISON
+ Ralph C Harkness           | RALPH C HARKNESS
+ F W Haselwood              | F W HASELWOOD
+ J Hathaway                 | J HATHAWAY
+ J Haughn                   | J HAUGHN
+ Daniel Curtis Helt         | DANIEL C HELT
+ S Helwer                   | S HELWER
+ C Hendel                   | C HENDEL
+ S Henderson                | S HENDERSON
+ Matthew Thomas Herman      | MATTHEW T HERMAN
+ Frank E Herrick            | FRANK E HERRICK
+ R F Herrick                | R F HERRICK
+ E Hess                     | E HESS
+ W Hiester                  | W HIESTER
+ R Hilands                  | R HILANDS
+ Clair A Hill               | CLAIR A HILL
+ Edward Hill                | EDWARD HILL
+ Daniel Eli Hoagland        | DANIEL E HOAGLAND
+ R Hogan                    | R HOGAN
+ W Hogoboom                 | W HOGOBOOM
+ C Holcomb                  | C HOLCOMB
+ Louie B Holcomb            | LOUIE B HOLCOMB
+ L Holmes                   | L HOLMES
+ Michael John Holmes        | MICHAEL J HOLMES
+ Marcus Todd Houston        | MARCUS T HOUSTON
+ O Howard                   | O HOWARD
+ Jack Jerome Hubbard        | JACK J HUBBARD
+ Wallace George Hufford     | WALLACE G HUFFORD
+ Ronald Dean Hunt           | RONALD D HUNT
+ D Hunter                   | D HUNTER
+ W Hunter                   | W HUNTER
+ T Hurlburt                 | T HURLBURT
+ W Hyatt                    | W HYATT
+ P Iacono                   | P IACONO
+ F Ingalls                  | F INGALLS
+ J Ingalls                  | J INGALLS
+ R Irving                   | R IRVING
+ Peter Darrell Jackson      | PETER D JACKSON
+ S Jacobs                   | S JACOBS
+ R Jacobsen                 | R JACOBSEN
+ W Jewett                   | W JEWETT
+ William Charles Johnson    | WILLIAM C JOHNSON
+ Christopher Riggs Johnston | CHRISTOPHER R JOHNSTON
+ Kenneth Russell Johnston   | KENNETH R JOHNSTON
+ S Johnston                 | S JOHNSTON
+ M Jones                    | M JONES
+ P Joos                     | P JOOS
+ H Jorgensen                | H JORGENSEN
+ J Joslyn                   | J JOSLYN
+ F Joy                      | F JOY
+ D Karoly                   | D KAROLY
+ R Kauffman                 | R KAUFFMAN
+ Frank E Kelly              | FRANK E KELLY
+ Hugh E Kelly               | HUGH E KELLY
+ Robert Francis Kelly       | ROBERT F KELLY
+ S King                     | S KING
+ J Kirchmann                | J KIRCHMANN
+ Robert E Kleiner           | ROBERT E KLEINER
+ Franklin Ross Klopp        | FRANKLIN R KLOPP
+ Bob Ray Knuth              | BOB R KNUTH
+ K Knuth                    | K KNUTH
+ Barry Lyle Kolstad         | BARRY L KOLSTAD
+ Dylan Lyle Kolstad         | DYLAN L KOLSTAD
+ Guy Charles Kulstad        | GUY C KULSTAD
+ H Lacy                     | H LACY
+ Ilmars Lagzdins            | ILMARS LAGZDINS
+ Joseph Fred Lambert        | JOSEPH F LAMBERT
+ S Lambeth                  | S LAMBETH
+ E Lamoreaux                | E LAMOREAUX
+ Oscar G Larson             | OSCAR G LARSON
+ F Lehmann                  | F LEHMANN
+ J Lentell                  | J LENTELL
+ H Wade Le Roy              | H W LE ROY
+ R Leverton                 | R LEVERTON
+ L Levier                   | L LEVIER
+ E Lewis                    | E LEWIS
+ G Lewis                    | G LEWIS
+ L Lewis                    | L LEWIS
+ R Lewis                    | R LEWIS
+ W Lewis                    | W LEWIS
+ W Lightfoot                | W LIGHTFOOT
+ Daniel Lipiec              | DANIEL LIPIEC
+ A Logan                    | A LOGAN
+ Jason M Long               | JASON M LONG
+ H Lowden                   | H LOWDEN
+ D Lukleth                  | D LUKLETH
+ R Lydecker                 | R LYDECKER
+ E Macmillan                | E MACMILLAN
+ Gerald D Matson            | GERALD D MATSON
+ James Robert Maunder       | JAMES R MAUNDER
+ D Mcbride                  | D MCBRIDE
+ J Mcbride                  | J MCBRIDE
+ J Mcclary                  | J MCCLARY
+ R Mccormick                | R MCCORMICK
+ J Mccoy                    | J MCCOY
+ G Mcdaniel                 | G MCDANIEL
+ J Mcdaniel                 | J MCDANIEL
+ J Mcdonough                | J MCDONOUGH
+ Michael Randolph Mcgee     | MICHAEL R MCGEE
+ M Mcgovern                 | M MCGOVERN
+ H Mcgready                 | H MCGREADY
+ J Mcintire                 | J MCINTIRE
+ F Mckee                    | F MCKEE
+ H Mclendon                 | H MCLENDON
+ G Mcmurtry                 | G MCMURTRY
+ W Meredith                 | W MEREDITH
+ H Miller                   | H MILLER
+ J Miller                   | J MILLER
+ Jack Allen Moore           | JACK A MOORE
+ L Moore                    | L MOORE
+ Michael John Moore         | MICHAEL J MOORE
+ E Moravec                  | E MORAVEC
+ Patrick Ward Morrill       | PATRICK W MORRILL
+ P Morris                   | P MORRIS
+ W Moulton                  | W MOULTON
+ John E Murray              | JOHN E MURRAY
+ John S Murray              | JOHN S MURRAY
+ W Myrick                   | W MYRICK
+ G Neitsch                  | G NEITSCH
+ Dale Ernest Nelson         | DALE E NELSON
+ J Nelson                   | J NELSON
+ Kenneth Jeffrey Nelson     | KENNETH J NELSON
+ Stephen Gregory Nesvold    | STEPHEN G NESVOLD
+ F Newman                   | F NEWMAN
+ D Niemi                    | D NIEMI
+ Allan E Nilson             | ALLAN E NILSON
+ E Norris                   | E NORRIS
+ R Oakes                    | R OAKES
+ Michael Joseph O'Hern      | MICHAEL J O'HERN
+ J Olin                     | J OLIN
+ John Calvin Olson          | JOHN C OLSON
+ L Olson                    | L OLSON
+ Kenneth James Omsberg Jr   | KENNETH J OMSBERG JR
+ Anthony James O'Rourke     | ANTHONY J O'ROURKE
+ George Palmer Otterbeck    | GEORGE P OTTERBECK
+ K Pape                     | K PAPE
+ I Parker                   | I PARKER
+ R Patton                   | R PATTON
+ G Pearson                  | G PEARSON
+ Neale B Penfold            | NEALE B PENFOLD
+ G Perrin                   | G PERRIN
+ Otto F Peters              | OTTO F PETERS
+ R Peterson                 | R PETERSON
+ A Phares                   | A PHARES
+ A Phelps                   | A PHELPS
+ T Phillippi                | T PHILLIPPI
+ J Porter                   | J PORTER
+ Karl Von Prebor            | KARL V PREBOR
+ Kimberly Denise Preston    | KIMBERLY D PRESTON
+ Michael David Pulley       | MICHAEL D PULLEY
+ Mario Joseph Quiros        | MARIO J QUIROS
+ J Rabedew                  | J RABEDEW
+ E Ragsdale                 | E RAGSDALE
+ A Raines                   | A RAINES
+ George Christopher Rau     | GEORGE C RAU
+ G Redwine                  | G REDWINE
+ Richard Glen Reger         | RICHARD G REGER
+ P Rei                      | P REI
+ P Reid                     | P REID
+ M Reilly                   | M REILLY
+ Carl S Replogle Jr         | CARL S REPLOGLE JR
+ E Richardson               | E RICHARDSON
+ H Richardson               | H RICHARDSON
+ Robert Bruce Richardson    | ROBERT B RICHARDSON
+ Andrew Leroy Rieland       | ANDREW L RIELAND
+ L Rieland                  | L RIELAND
+ W B Rigby                  | W B RIGBY
+ W Rigby                    | W RIGBY
+ Wayne Andrew Riggins       | WAYNE A RIGGINS
+ Dale Allen Roper           | DALE A ROPER
+ Charles M Roscoe           | CHARLES M ROSCOE
+ Stanley B Roscoe           | STANLEY B ROSCOE
+ R Russe                    | R RUSSE
+ Benjamin D W Russell       | BENJAMIN D W RUSSELL
+ G Rutledge                 | G RUTLEDGE
+ David James Ryan           | DAVID J RYAN
+ Dennis Michael Ryan        | DENNIS M RYAN
+ J Ryan                     | J RYAN
+ Lorien Alise Sanchez       | LORIEN A SANCHEZ
+ Manuel Anthony Sanchez     | MANUEL A SANCHEZ
+ Michael Walter Sattel      | MICHAEL W SATTEL
+ R Saukko                   | R SAUKKO
+ C Schaller                 | C SCHALLER
+ Joseph J Scherf            | JOSEPH J SCHERF
+ Edward Schillinger         | EDWARD SCHILLINGER
+ Max A Schillinger          | MAX A SCHILLINGER
+ J Schmitt                  | J SCHMITT
+ Paul M Schmook             | PAUL M SCHMOOK
+ David Loren Schneider      | DAVID L SCHNEIDER
+ K Scholz                   | K SCHOLZ
+ L Schumpberger             | L SCHUMPBERGER
+ T Seinturier               | T SEINTURIER
+ John Royal Selvage         | JOHN R SELVAGE
+ M Sevy                     | M SEVY
+ C Shaller                  | C SHALLER
+ W Sharp                    | W SHARP
+ J Shaw                     | J SHAW
+ Leonard Medford Shaw       | LEONARD M SHAW
+ M Sheahan                  | M SHEAHAN
+ P Shelcalin                | P SHELCALIN
+ J Sheppard                 | J SHEPPARD
+ William Edward Sheppard    | WILLIAM E SHEPPARD
+ James Gregory Siebert      | JAMES G SIEBERT
+ C Simonson                 | C SIMONSON
+ Harold John Slate          | HAROLD J SLATE
+ A T Smith                  | A T SMITH
+ E Smith                    | E SMITH
+ N Smith                    | N SMITH
+ Robert Allen Smith         | ROBERT A SMITH
+ T Smith                    | T SMITH
+ F Somner                   | F SOMNER
+ R Sorensen                 | R SORENSEN
+ R Souders                  | R SOUDERS
+ B Sousa                    | B SOUSA
+ J Spaulding                | J SPAULDING
+ W Spratford                | W SPRATFORD
+ N Springer                 | N SPRINGER
+ Wallace Galen Stadter      | WALLACE G STADTER
+ Jeff Scott Steffan         | JEFF S STEFFAN
+ R Stephan                  | R STEPHAN
+ Thomas Norman Stephens     | THOMAS N STEPHENS
+ Richard B Stipovich        | RICHARD B STIPOVICH
+ H Stobel                   | H STOBEL
+ Wilbert E Stockton         | WILBERT E STOCKTON
+ R Stoll                    | R STOLL
+ G Strand                   | G STRAND
+ Donald J Straub            | DONALD J STRAUB
+ G Stubblefield             | G STUBBLEFIELD
+ R Sullivan                 | R SULLIVAN
+ E Swan                     | E SWAN
+ C Sweet                    | C SWEET
+ Walter B Sweet             | WALTER B SWEET
+ A Swickard                 | A SWICKARD
+ Knut Syverson              | KNUT SYVERSON
+ K Tait                     | K TAIT
+ C Taylor                   | C TAYLOR
+ E Taylor                   | E TAYLOR
+ Philip Vaughn Taylor       | PHILIP V TAYLOR
+ Danny Charles Teague       | DANNY C TEAGUE
+ D Teel                     | D TEEL
+ Daniel Davies Thomas       | DANIEL D THOMAS
+ W Thomas                   | W THOMAS
+ E Thorne                   | E THORNE
+ M Tietz                    | M TIETZ
+ R Titera                   | R TITERA
+ L Tout                     | L TOUT
+ J Tracy                    | J TRACY
+ Curt D Traina              | CURT D TRAINA
+ Richard Glen Urban         | RICHARD G URBAN
+ L Vanderbilt               | L VANDERBILT
+ B Van Zandt                | B VAN ZANDT
+ Trueman Edward Vroman      | TRUEMAN E VROMAN
+ C Wagner                   | C WAGNER
+ J Wahl                     | J WAHL
+ L Walter                   | L WALTER
+ R Walter                   | R WALTER
+ J Warboys                  | J WARBOYS
+ W Watson                   | W WATSON
+ G Wetmore                  | G WETMORE
+ A Wheelan                  | A WHEELAN
+ F Wheeler                  | F WHEELER
+ J Whipple                  | J WHIPPLE
+ Thurman B White            | THURMAN B WHITE
+ C Whitehead                | C WHITEHEAD
+ A Whitlow                  | A WHITLOW
+ E Wilsey                   | E WILSEY
+ R Wilson                   | R WILSON
+ Robert L Winkelhaus        | ROBERT L WINKELHAUS
+ G Winzler                  | G WINZLER
+ John R Winzler             | JOHN R WINZLER
+ L Wood                     | L WOOD
+ Donald N Wooden            | DONALD N WOODEN
+ A Woods                    | A WOODS
+ J Woods                    | J WOODS
+ Wallace Earl Wright        | WALLACE E WRIGHT
+ D Yarrington               | D YARRINGTON
+ Charles R Young            | CHARLES R YOUNG
+ P Young                    | P YOUNG
+ Ryan Young                 | RYAN YOUNG
+(441 rows)
+

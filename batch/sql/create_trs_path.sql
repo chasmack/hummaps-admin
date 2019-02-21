@@ -88,6 +88,24 @@ SELECT map_id, hummaps_staging.trs2path(tshp, rng, sec, subsec) trs_path, source
 FROM hummaps.trs
 ;
 
+-- Delete trs full section records having a
+-- corresponding trs subsection record.
+
+WITH t1 AS (
+    SELECT DISTINCT t1.map_id, subpath(t1.trs_path, 0, 3) trs_path
+    FROM hummaps.trs_path t1
+    WHERE nlevel(t1.trs_path) = 4
+    ORDER BY map_id
+)
+DELETE FROM hummaps.trs_path
+WHERE id IN (
+    SELECT t2.id
+    FROM hummaps.trs_path t2
+    JOIN t1 USING (map_id, trs_path)
+    WHERE nlevel(t2.trs_path) = 3
+)
+;
+
 VACUUM FREEZE hummaps.trs_path;
 CREATE INDEX hummaps_path_gist_idx ON hummaps.trs_path USING GIST (trs_path);
 

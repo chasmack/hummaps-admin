@@ -9,7 +9,7 @@ from openpyxl import Workbook
 # 'https://hummaps.com/maps/?page=1&ds=2018-01-01&de=2018-12-31'
 
 URL_BASE = 'https://hummaps.com/maps/'
-XLSX_FILE = r'd:\Projects\Python\hummaps-admin\scrape\scrapings.xlsx'
+XLSX_FILE = r'd:\Projects\Python\hummaps-admin\batch\scrapings.xlsx'
 XLSX_COLS = ('MAPTYPE', 'BOOK', 'PAGE', 'NPAGES', 'SURVEYORS', 'RECDATE', 'CLIENT', 'DESC', 'PDF', 'TRS', 'NOTE')
 
 def scrape_maps(start, end, xlsx_file):
